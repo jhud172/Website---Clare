@@ -1,10 +1,12 @@
 services:
   - type: web
     name: clare-brunton-life-ceremonies
-    env: docker
+    runtime: docker
     plan: free
     autoDeploy: true
     dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
     envVars:
       - key: SITE_NAME
         value: Clare Brunton Life Ceremonies

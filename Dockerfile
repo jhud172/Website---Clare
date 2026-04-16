@@ -2,7 +2,7 @@ FROM node:20-alpine AS css
 WORKDIR /app
 
 COPY package.json package-lock.json* postcss.config.js tailwind.config.js ./
-RUN npm install
+RUN npm ci
 
 COPY src/main/frontend ./src/main/frontend
 COPY src/main/resources/templates ./src/main/resources/templates
@@ -28,4 +28,4 @@ COPY --from=build /app/target/*.jar app.jar
 ENV PORT=8080
 EXPOSE 8080
 
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT} -jar app.jar"]
+CMD ["sh", "-c", "java -Dserver.port=${PORT} -jar /app/app.jar"]
