@@ -1,0 +1,15 @@
+{
+  "name": "clare-brunton-life-ceremonies",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build:css": "postcss src/main/frontend/styles/site.css -o src/main/resources/static/css/site.css",
+    "dev:css": "postcss src/main/frontend/styles/site.css -o src/main/resources/static/css/site.css --watch"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^3.4.17"
+  }
+}

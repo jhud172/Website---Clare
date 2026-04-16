@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('blog')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-inner">
+            <div>
+                <p class="eyebrow">Journal</p>
+                <h1>Thoughtful content to build trust and improve search visibility.</h1>
+            </div>
+            <p class="lead">These are seeded placeholder posts. Replace them with real advice, local SEO topics, recent ceremony reflections and practical planning guidance.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell article-stack">
+            <article class="article-row" th:each="post : ${posts}">
+                <div class="article-column">
+                    <p class="article-meta">
+                        <span th:text="${post.category()}">Planning</span>
+                        <span th:text="${post.publishedOn()}">May 2026</span>
+                    </p>
+                    <h2 th:text="${post.title()}">Questions to ask before booking a celebrant</h2>
+                </div>
+                <div class="article-column">
+                    <p th:text="${post.excerpt()}">Placeholder excerpt.</p>
+                    <a class="text-link" th:href="@{/blog/{slug}(slug=${post.slug()})}">Open article</a>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer class="site-footer" th:fragment="site-footer">
+    <div class="shell footer-grid">
+        <div class="footer-brand">
+            <p class="eyebrow" th:text="${site.name}">Clare Brunton Life Ceremonies</p>
+            <h2>Warm, modern ceremonies with heart, clarity and calm.</h2>
+            <p>For weddings, funerals and life's in-between moments, Clare creates ceremonies that feel beautifully prepared, deeply personal and easy to trust.</p>
+        </div>
+
+        <div>
+            <p class="footer-heading">Explore</p>
+            <ul class="footer-list">
+                <li><a th:href="@{/about}">About</a></li>
+                <li><a th:href="@{/ceremonies}">Ceremonies</a></li>
+                <li><a th:href="@{/weddings}">Weddings</a></li>
+                <li><a th:href="@{/funerals}">Funerals</a></li>
+                <li><a th:href="@{/reviews}">Reviews</a></li>
+                <li><a th:href="@{/contact}">Contact</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <p class="footer-heading">Get in touch</p>
+            <ul class="footer-list">
+                <li><a th:href="'mailto:' + ${site.contactEmail}" th:text="${site.contactEmail}">clarebruntoncelebrant@gmail.com</a></li>
+                <li><a th:href="'tel:' + ${site.phoneNumber}" th:text="${site.phoneNumber}">07885 428304</a></li>
+                <li th:if="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">
+                    <a th:href="${site.instagramUrl}" target="_blank" rel="noreferrer">Instagram</a>
+                </li>
+                <li><a th:href="@{/privacy}">Privacy</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

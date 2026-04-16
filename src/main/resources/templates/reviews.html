@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('reviews')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Reviews</p>
+                <h1>A dedicated space for kind words, thoughtful feedback and the experience Clare is building around.</h1>
+            </div>
+            <p class="lead">As Clare begins leading ceremonies, this page is ready to hold real reviews from couples, families, venues and trusted professional contacts.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell split-layout">
+            <div class="section-heading compact">
+                <p class="eyebrow">Launch note</p>
+                <h2>Real reviews will be added here as the first ceremonies are completed.</h2>
+            </div>
+            <div class="story-copy">
+                <p>Until then, the website is being built around the qualities Clare wants every person to feel and later describe: warmth, clarity, calm guidance and a ceremony that sounds genuinely personal.</p>
+                <p>This means the page is honest from day one, while still ready for future testimonials as the business grows.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell quote-grid">
+            <article class="quote-card">
+                <p class="quote-label">What couples should feel</p>
+                <blockquote>Supported, listened to and excited about the ceremony taking shape around them.</blockquote>
+            </article>
+            <article class="quote-card">
+                <p class="quote-label">What families should feel</p>
+                <blockquote>Gently guided through a difficult time with warmth, steadiness and respectful communication.</blockquote>
+            </article>
+            <article class="quote-card">
+                <p class="quote-label">What professional partners should feel</p>
+                <blockquote>Confident that Clare will bring care, professionalism and a calm presence to the room.</blockquote>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell cta-panel">
+            <div>
+                <p class="eyebrow">Planning something important?</p>
+                <h2>You do not need to wait for a long list of reviews to know whether the tone feels right.</h2>
+                <p>If Clare's style sounds like the kind of support you want, the next step is simply getting in touch.</p>
+            </div>
+            <a class="button" th:href="@{/contact}">Contact Clare</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('contact')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Privacy</p>
+                <h1>Your enquiry details are handled with care, clarity and respect.</h1>
+            </div>
+            <p class="lead">This notice explains what information Clare Brunton Life Ceremonies collects through this website and how that information is used.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell prose-copy">
+            <h2>Who is responsible for your data</h2>
+            <p>Clare Brunton Life Ceremonies is responsible for the information submitted through this website. If you have any questions about how your details are handled, you can contact Clare by email at <a class="text-link" th:href="'mailto:' + ${site.contactEmail}" th:text="${site.contactEmail}">clarebruntoncelebrant@gmail.com</a>.</p>
+
+            <h2>What information is collected</h2>
+            <p>When you use the enquiry form, the website collects the details you choose to provide. This may include your name, email address, phone number, ceremony type, event date, venue or location, and any information you include in your message.</p>
+
+            <h2>How your information is used</h2>
+            <p>Your details are used only to respond to your enquiry, discuss your ceremony requirements, and manage follow-up communication about the services you have asked about. The website does not use your details for unrelated marketing activity.</p>
+
+            <h2>Lawful basis for processing</h2>
+            <p>The information you submit is processed because it is necessary to respond to your enquiry and because you have chosen to contact Clare about possible services.</p>
+
+            <h2>How your information is stored</h2>
+            <p>Enquiry details are sent through the website contact process and may be stored in Clare's email system or related administrative records where needed to handle your enquiry properly. Access is limited to the business for the purpose of responding to you.</p>
+
+            <h2>How long information is kept</h2>
+            <p>Enquiry information will only be kept for as long as it is reasonably needed to respond to your request, manage a booking, or meet legal, tax, accounting or record-keeping responsibilities where applicable.</p>
+
+            <h2>Sharing your information</h2>
+            <p>Your data is not sold to third parties. Information is only shared where that is necessary to deliver or support your enquiry, for example through website hosting, email delivery services, or legal and professional obligations.</p>
+
+            <h2>Your rights</h2>
+            <p>You may ask for access to the information held about you, request corrections, ask for deletion where appropriate, or object to certain kinds of processing. You can do this by contacting Clare directly using the email address above.</p>
+
+            <h2>Website updates</h2>
+            <p>This privacy notice may be updated from time to time to reflect changes in the business, legal requirements, or how the website operates.</p>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

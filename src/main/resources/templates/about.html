@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('about')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">About Clare</p>
+                <h1>A celebrant style built around warmth, steadiness and personal detail.</h1>
+            </div>
+            <p class="lead">As Clare moves from a long career in policing into celebrancy, she is bringing the same composure, care and sense of responsibility into a more personal kind of work.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell split-layout split-layout-visual">
+            <div class="visual-stage visual-stage-portrait">
+                <div class="visual-note">Portrait photography will sit here beautifully once Clare's images are ready.</div>
+            </div>
+            <div class="story-copy">
+                <p>Clare Brunton Life Ceremonies has been shaped around the idea that important days deserve more than a standard script. They deserve words, pacing and presence that feel thoughtful from the first hello to the final goodbye.</p>
+                <p>After years of working in a professional public-facing role, Clare is now building a celebrant practice that feels warm, modern and deeply human. Her approach is calm and organised, but never cold. The aim is always to create a ceremony that feels personal, beautifully put together and true to the people at the centre of it.</p>
+                <p>Whether the day is joyful, reflective or somewhere in between, Clare wants clients to feel held, listened to and confident that the ceremony will sound like them, not like something borrowed from a template.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell detail-grid">
+            <article class="detail-card">
+                <p class="eyebrow">Professional warmth</p>
+                <h3>Warm and approachable without losing structure.</h3>
+                <p>Clare's personality is naturally fun, bubbly and open, but the experience around that stays clear, calm and easy to trust.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Modern tone</p>
+                <h3>Boho, modern and never old-fashioned.</h3>
+                <p>The visual and written style leans fresh, editorial and relaxed rather than overly formal or traditional.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Certification</p>
+                <h3>Training that supports confidence.</h3>
+                <p>Clare is working towards launch with accreditation through the Academy of Modern Celebrants as a certified wedding celebrant.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell split-layout">
+            <div class="section-heading compact">
+                <p class="eyebrow">What working together feels like</p>
+                <h2>Personal support, clear communication and no unnecessary fuss.</h2>
+            </div>
+            <div class="story-copy">
+                <p>Clients can expect a process that feels guided rather than overwhelming. Clare keeps the pace clear, listens closely, and shapes each ceremony around the people involved rather than relying on generic wording.</p>
+                <p>She is available for weddings, funerals and other milestone ceremonies, with travel and ceremony details discussed personally as part of the enquiry process.</p>
+                <a class="button button-secondary" th:href="@{/contact}">Start a conversation</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

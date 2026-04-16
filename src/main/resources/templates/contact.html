@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('contact')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Contact</p>
+                <h1>Start with a simple message and Clare will come back to you personally.</h1>
+            </div>
+            <p class="lead">Whether you are planning a wedding, arranging a funeral, or enquiring about another ceremony, the first step is simply getting in touch.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell contact-grid">
+            <aside class="contact-panel">
+                <p class="eyebrow">Direct contact</p>
+                <h2>Prefer to reach out directly?</h2>
+                <ul class="contact-list">
+                    <li>
+                        <span>Email</span>
+                        <a th:href="'mailto:' + ${site.contactEmail}" th:text="${site.contactEmail}">clarebruntoncelebrant@gmail.com</a>
+                    </li>
+                    <li>
+                        <span>Phone</span>
+                        <a th:href="'tel:' + ${site.phoneNumber}" th:text="${site.phoneNumber}">07885 428304</a>
+                    </li>
+                    <li th:if="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">
+                        <span>Instagram</span>
+                        <a th:href="${site.instagramUrl}" target="_blank" rel="noreferrer">Open profile</a>
+                    </li>
+                </ul>
+
+                <p class="callout">Clare will use the information you send here only to respond to your enquiry and discuss the ceremony you are asking about.</p>
+            </aside>
+
+            <form class="contact-form" th:action="@{/contact}" th:object="${inquiryForm}" method="post" novalidate>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="firstName">First name</label>
+                        <input id="firstName" type="text" th:field="*{firstName}">
+                        <p class="field-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="lastName">Last name</label>
+                        <input id="lastName" type="text" th:field="*{lastName}">
+                        <p class="field-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" th:field="*{email}">
+                        <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="phone">Phone</label>
+                        <input id="phone" type="text" th:field="*{phone}">
+                        <p class="field-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone error</p>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="serviceType">Ceremony type</label>
+                        <select id="serviceType" th:field="*{serviceType}">
+                            <option value="">Select a ceremony type</option>
+                            <option th:each="option : ${serviceOptions}" th:value="${option}" th:text="${option}">Wedding ceremony</option>
+                        </select>
+                        <p class="field-error" th:if="${#fields.hasErrors('serviceType')}" th:errors="*{serviceType}">Service type error</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label for="eventDate">Preferred date</label>
+                        <input id="eventDate" type="date" th:field="*{eventDate}">
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="venue">Venue or location</label>
+                    <input id="venue" type="text" th:field="*{venue}">
+                    <p class="field-error" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}">Venue error</p>
+                </div>
+
+                <div class="field-group">
+                    <label for="message">Tell Clare a little more</label>
+                    <textarea id="message" th:field="*{message}" rows="7"></textarea>
+                    <p class="field-error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Message error</p>
+                </div>
+
+                <div class="checkbox-row">
+                    <input id="privacyAccepted" type="checkbox" th:field="*{privacyAccepted}">
+                    <label for="privacyAccepted">I am happy for my details to be used so Clare can respond to this enquiry in line with the privacy notice.</label>
+                </div>
+                <p class="field-error" th:if="${#fields.hasErrors('privacyAccepted')}" th:errors="*{privacyAccepted}">Privacy error</p>
+
+                <button class="button" type="submit">Send enquiry</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

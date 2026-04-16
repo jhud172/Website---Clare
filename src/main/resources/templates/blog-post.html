@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('blog')}"></div>
+
+<main>
+    <article class="section article-page">
+        <div class="shell article-page-grid">
+            <div>
+                <p class="eyebrow" th:text="${post.heroEyebrow()}">Editorial guidance for modern wedding ceremonies</p>
+                <h1 th:text="${post.title()}">Creating a wedding ceremony that still feels like you</h1>
+                <p class="article-meta">
+                    <span th:text="${post.category()}">Weddings</span>
+                    <span th:text="${post.readTime()}">4 min read</span>
+                    <span th:text="${post.publishedOn()}">May 2026</span>
+                </p>
+            </div>
+
+            <div class="article-body">
+                <p th:each="paragraph : ${post.paragraphs()}" th:text="${paragraph}">Placeholder paragraph.</p>
+                <a class="button button-secondary" th:href="@{/contact}">Ask about this service</a>
+            </div>
+        </div>
+    </article>
+
+    <section class="section section-tint">
+        <div class="shell">
+            <div class="section-heading">
+                <p class="eyebrow">More reading</p>
+                <h2>Use this area for related posts, FAQs or local planning content.</h2>
+            </div>
+            <div class="article-grid">
+                <article class="article-card" th:each="relatedPost : ${posts}" th:if="${relatedPost.slug() != post.slug()}">
+                    <p class="article-meta">
+                        <span th:text="${relatedPost.category()}">Planning</span>
+                        <span th:text="${relatedPost.readTime()}">3 min read</span>
+                    </p>
+                    <h3 th:text="${relatedPost.title()}">Questions to ask before booking a celebrant</h3>
+                    <a class="text-link" th:href="@{/blog/{slug}(slug=${relatedPost.slug()})}">Read article</a>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

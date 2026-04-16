@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('contact')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Thank you</p>
+                <h1>Your enquiry has been safely received.</h1>
+            </div>
+            <p class="lead">Clare will read through your details and come back to you personally as soon as she can.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell narrow-copy">
+            <p>If your enquiry is time-sensitive, you are also welcome to follow up by email or phone using the contact details shown on the site.</p>
+            <a class="button" th:href="@{/}">Return home</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

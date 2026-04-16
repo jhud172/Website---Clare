@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: clare-brunton-life-ceremonies
+    env: docker
+    plan: free
+    autoDeploy: true
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SITE_NAME
+        value: Clare Brunton Life Ceremonies
+      - key: SITE_TAGLINE
+        value: Weddings, funerals and heartfelt ceremonies in between.
+      - key: SITE_CONTACT_EMAIL
+        value: clarebruntoncelebrant@gmail.com
+      - key: SITE_PHONE_NUMBER
+        value: "07885 428304"
+      - key: SITE_INSTAGRAM_URL
+        value: ""
+      - key: SITE_BASE_URL
+        value: https://www.clarebruntonlifeceremonies.com
+      - key: SITE_FROM_EMAIL
+        sync: false
+      - key: INQUIRY_NOTIFICATION_EMAIL
+        sync: false
+      - key: SPRING_MAIL_HOST
+        sync: false
+      - key: SPRING_MAIL_PORT
+        value: "587"
+      - key: SPRING_MAIL_USERNAME
+        sync: false
+      - key: SPRING_MAIL_PASSWORD
+        sync: false

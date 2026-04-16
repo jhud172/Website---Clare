@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('home')}"></div>
+
+<main>
+    <section class="hero">
+        <div class="shell hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">Clare Brunton Life Ceremonies</p>
+                <h1>Warm, modern ceremonies shaped with heart, clarity and calm.</h1>
+                <p class="lead">For weddings, funerals and life's meaningful moments in between, Clare creates ceremonies that feel deeply personal, beautifully prepared and easy to trust.</p>
+                <div class="hero-actions">
+                    <a class="button" th:href="@{/contact}">Make an enquiry</a>
+                    <a class="button button-secondary" th:href="@{/ceremonies}">Explore ceremonies</a>
+                </div>
+                <ul class="trust-list">
+                    <li>Certified wedding celebrant with the Academy of Modern Celebrants</li>
+                    <li>Bespoke ceremonies with a warm, modern tone</li>
+                    <li>Available for weddings, funerals and milestone moments</li>
+                </ul>
+            </div>
+
+            <div class="hero-visual visual-stage visual-stage-home">
+                <div class="visual-badge">CBLC</div>
+                <p class="visual-caption">Designed to feel calm, elevated and personal from the first scroll.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell section-heading">
+            <p class="eyebrow">Where to begin</p>
+            <h2>Two clear paths for the moments clients are most likely to be planning right now.</h2>
+            <p class="lead">Weddings and funerals lead the launch experience, with other ceremonies held in one simple overview so the site stays focused and easy to move through.</p>
+        </div>
+
+        <div class="shell path-grid">
+            <a class="path-panel path-panel-wedding" th:href="@{/weddings}">
+                <p class="path-index">01</p>
+                <h3>Wedding ceremonies</h3>
+                <p>Modern, heartfelt ceremonies written around your story, your style and the atmosphere you want guests to remember.</p>
+                <span class="text-link">View wedding ceremonies</span>
+            </a>
+
+            <a class="path-panel path-panel-funeral" th:href="@{/funerals}">
+                <p class="path-index">02</p>
+                <h3>Funerals and memorials</h3>
+                <p>Gentle, carefully paced services that support families with clarity, warmth and a sense of calm at every stage.</p>
+                <span class="text-link">View funeral ceremonies</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell split-layout">
+            <div class="section-heading compact">
+                <p class="eyebrow">A personal approach</p>
+                <h2>Professional when it matters, personal where it counts.</h2>
+            </div>
+            <div class="story-copy">
+                <p>Clare is building her celebrant work around the things people value most when a day matters: warmth, steadiness, clear communication and words that never feel generic.</p>
+                <p>Her style leans modern, relaxed and beautifully put together. The aim is not to overcomplicate the experience, but to help couples and families feel looked after from the first conversation through to the ceremony itself.</p>
+                <a class="text-link" th:href="@{/about}">Read Clare's story</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell section-heading">
+            <p class="eyebrow">More than one kind of ceremony</p>
+            <h2>Life does not move in one shape, and the website does not need to either.</h2>
+            <p class="lead">Alongside weddings and funerals, Clare also offers naming ceremonies, vow renewals and other milestone moments that deserve the same thought and care.</p>
+        </div>
+
+        <div class="shell detail-grid">
+            <article class="detail-card">
+                <h3>Naming ceremonies</h3>
+                <p>Thoughtful ceremonies for welcoming children into family life with warmth, meaning and participation.</p>
+            </article>
+            <article class="detail-card">
+                <h3>Vow renewals</h3>
+                <p>Elegant celebrations for couples who want to mark a chapter together in a way that still feels true to them.</p>
+            </article>
+            <article class="detail-card">
+                <h3>Milestone moments</h3>
+                <p>Flexible ceremony design for special occasions that need more feeling, structure and personality than a standard script can offer.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section section-deep">
+        <div class="shell process-layout">
+            <div class="section-heading compact light">
+                <p class="eyebrow">How it works</p>
+                <h2>A simple, reassuring process from first message to ceremony day.</h2>
+            </div>
+
+            <ol class="process-list">
+                <li>
+                    <span>01</span>
+                    <div>
+                        <h3>First conversation</h3>
+                        <p>Start with a friendly enquiry so Clare can understand the ceremony, the tone you want, and what support would feel most helpful.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div>
+                        <h3>Planning and writing</h3>
+                        <p>The structure, wording and flow are shaped around your people and your story, with space for thoughtful revisions where needed.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div>
+                        <h3>Delivered with care</h3>
+                        <p>On the day itself, the focus is on a calm presence, clear pacing and a ceremony that feels beautifully held from beginning to end.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell section-heading">
+            <p class="eyebrow">Reviews and reassurance</p>
+            <h2>The reviews page is ready for real client words as Clare begins leading ceremonies.</h2>
+            <p class="lead">Until those first reviews arrive, the experience is being built around three qualities Clare wants every couple and family to talk about afterwards: warmth, clarity and personal detail.</p>
+        </div>
+
+        <div class="shell quote-grid">
+            <article class="quote-card">
+                <p class="quote-label">Warmth</p>
+                <blockquote>Every conversation should feel human, calm and easy from the beginning.</blockquote>
+            </article>
+            <article class="quote-card">
+                <p class="quote-label">Clarity</p>
+                <blockquote>People should always know what happens next, what is included, and feel supported rather than overwhelmed.</blockquote>
+            </article>
+            <article class="quote-card">
+                <p class="quote-label">Personal detail</p>
+                <blockquote>No ceremony should sound copied and pasted. It should feel like it belongs to the people in the room.</blockquote>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell cta-panel">
+            <div>
+                <p class="eyebrow">Ready to start planning?</p>
+                <h2>If the tone feels right, the next step is simply a conversation.</h2>
+                <p>Send an enquiry and Clare can come back to you personally about availability, ceremony type and the right package for your plans.</p>
+            </div>
+            <a class="button" th:href="@{/contact}">Contact Clare</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

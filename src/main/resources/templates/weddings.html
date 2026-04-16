@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('weddings')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Wedding ceremonies</p>
+                <h1>Modern ceremonies for couples who want something personal, polished and full of feeling.</h1>
+            </div>
+            <p class="lead">Clare creates wedding ceremonies that feel like a true reflection of the couple at the centre of them, with the right balance of warmth, style and calm guidance.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell split-layout split-layout-visual">
+            <div class="story-copy">
+                <p>Every wedding ceremony should sound like the people it belongs to. Clare works with couples to shape a ceremony that feels relaxed, beautifully paced and genuinely theirs rather than over-scripted or overly formal.</p>
+                <p>From the first conversation through to delivery on the day, the process is designed to feel clear and supportive. There is space for story, vows, readings, family involvement and those small details that make the whole thing feel personal.</p>
+                <p>This is a celebrant-led ceremony service. Any legal marriage requirements should always be confirmed separately where a registrar or other legal process is still required.</p>
+            </div>
+            <div class="visual-stage visual-stage-weddings">
+                <div class="visual-note">Wedding imagery can be swapped for Clare's own photography or venue-led stock imagery at any point.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell section-heading">
+            <p class="eyebrow">Packages</p>
+            <h2>Three wedding ceremony options, each with room for final wording and pricing sign-off.</h2>
+            <p class="lead">The structure is ready now, and exact pricing can be added as soon as Clare finalises the numbers.</p>
+        </div>
+
+        <div class="shell package-grid">
+            <article class="package-card">
+                <p class="package-tag">Package one</p>
+                <h3>The Ceremony Edit</h3>
+                <p class="package-price">Pricing to be confirmed</p>
+                <ul class="package-list">
+                    <li>One consultation</li>
+                    <li>Bespoke ceremony writing</li>
+                    <li>Delivery on the day</li>
+                </ul>
+            </article>
+            <article class="package-card featured">
+                <p class="package-tag">Package two</p>
+                <h3>The Signature Edit</h3>
+                <p class="package-price">Pricing to be confirmed</p>
+                <ul class="package-list">
+                    <li>Everything in package one</li>
+                    <li>Additional contact and planning meetings</li>
+                    <li>Rehearsal support</li>
+                </ul>
+            </article>
+            <article class="package-card">
+                <p class="package-tag">Package three</p>
+                <h3>The Keepsake Edit</h3>
+                <p class="package-price">Pricing to be confirmed</p>
+                <ul class="package-list">
+                    <li>Everything in package two</li>
+                    <li>Printed ceremony script</li>
+                    <li>Printed vows to keep</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell process-layout">
+            <div class="section-heading compact">
+                <p class="eyebrow">What to expect</p>
+                <h2>A wedding process that feels exciting, not overwhelming.</h2>
+            </div>
+            <ol class="process-list">
+                <li>
+                    <span>01</span>
+                    <div>
+                        <h3>Availability and first chat</h3>
+                        <p>Start with a conversation about your date, venue, ideas and the kind of atmosphere you want the ceremony to have.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div>
+                        <h3>Story and structure</h3>
+                        <p>Clare shapes the script around your story, your people and the moments that matter most to you.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div>
+                        <h3>Ready for the day</h3>
+                        <p>Once everything feels right, the ceremony is delivered with confidence, warmth and a calm presence on the day itself.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell faq-grid">
+            <div class="section-heading compact">
+                <p class="eyebrow">Helpful notes</p>
+                <h2>Questions couples often need answered early.</h2>
+            </div>
+            <div class="faq-list">
+                <article>
+                    <h3>Can the ceremony be fully bespoke?</h3>
+                    <p>Yes. The wording, tone and structure are designed around the couple rather than taken from a standard script.</p>
+                </article>
+                <article>
+                    <h3>Can family and friends be involved?</h3>
+                    <p>Absolutely. Readings, contributions and meaningful personal touches can all be built into the ceremony.</p>
+                </article>
+                <article>
+                    <h3>Is the ceremony legally binding?</h3>
+                    <p>Any legal marriage requirements should be confirmed separately. Clare's website does not make claims about legal marriage authority unless that position is formally confirmed.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell cta-panel">
+            <div>
+                <p class="eyebrow">Planning a wedding?</p>
+                <h2>Tell Clare about your date, your venue and the kind of ceremony you have in mind.</h2>
+            </div>
+            <a class="button" th:href="@{/contact}">Enquire about weddings</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
+<body>
+<div th:replace="~{fragments/header :: site-header('ceremonies')}"></div>
+
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-grid">
+            <div>
+                <p class="eyebrow">Ceremonies</p>
+                <h1>Beautifully prepared ceremonies for the chapters that deserve more than a script.</h1>
+            </div>
+            <p class="lead">Weddings and funerals sit at the heart of the launch, with space for naming ceremonies, vow renewals and other milestone moments as the business grows.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell path-grid">
+            <a class="path-panel path-panel-wedding" th:href="@{/weddings}">
+                <p class="path-index">01</p>
+                <h3>Wedding ceremonies</h3>
+                <p>Bespoke ceremonies for modern couples who want something stylish, heartfelt and completely personal.</p>
+                <span class="text-link">View weddings</span>
+            </a>
+            <a class="path-panel path-panel-funeral" th:href="@{/funerals}">
+                <p class="path-index">02</p>
+                <h3>Funerals and memorials</h3>
+                <p>Supportive ceremonies written with warmth and care for families, funeral directors and meaningful gatherings.</p>
+                <span class="text-link">View funerals</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell detail-grid">
+            <article class="detail-card">
+                <p class="eyebrow">03</p>
+                <h3>Naming ceremonies</h3>
+                <p>A warm way to welcome children into family life with words, rituals and roles that feel personal to those involved.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">04</p>
+                <h3>Vow renewals</h3>
+                <p>A chance to celebrate an ongoing story with fresh words, new promises and a ceremony that fits the life you have built together.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">05</p>
+                <h3>Other milestone ceremonies</h3>
+                <p>If there is a moment worth marking with thought and meaning, Clare can shape a ceremony around the tone and story you want to hold.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="shell cta-panel">
+            <div>
+                <p class="eyebrow">Need guidance on the right fit?</p>
+                <h2>If you know the moment but not yet the exact format, Clare can help shape it with you.</h2>
+            </div>
+            <a class="button" th:href="@{/contact}">Ask about your ceremony</a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+</body>
+</html>
