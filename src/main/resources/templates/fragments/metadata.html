@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="page-metadata(pageTitle, pageDescription)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle != null ? pageTitle + ' | ' + site.name : site.name}">Clare Brunton Ceremonies</title>
+    <meta name="description" th:content="${pageDescription != null ? pageDescription : site.tagline}">
+    <meta name="theme-color" content="#f4eee5">
+</th:block>
+</html>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head :: site-head(${pageTitle}, ${pageDescription})}"></head>
-<body>
-<div th:replace="~{fragments/header :: site-header('home')}"></div>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'home', ~{::main})}">
 <main>
     <section class="hero">
         <div class="shell hero-grid">
@@ -157,7 +154,4 @@
         </div>
     </section>
 </main>
-
-<div th:replace="~{fragments/footer :: site-footer}"></div>
-</body>
 </html>

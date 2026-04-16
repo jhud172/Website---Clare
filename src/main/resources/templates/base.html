@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="site-head(pageTitle, pageDescription)">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${pageTitle != null ? pageTitle + ' | ' + site.name : site.name}">Clare Brunton Ceremonies</title>
-    <meta name="description" th:content="${pageDescription != null ? pageDescription : site.tagline}">
-    <meta name="theme-color" content="#f4eee5">
+<th:block th:fragment="asset-imports">
     <link rel="icon" type="image/svg+xml" th:href="@{/favicon.svg}">
+    <link rel="shortcut icon" th:href="@{/favicon.svg}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/site.css}">
     <script defer th:src="@{/js/site.js}"></script>
-</head>
+</th:block>
 </html>
