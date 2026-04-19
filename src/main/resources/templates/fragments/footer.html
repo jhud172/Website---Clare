@@ -4,9 +4,13 @@
 <footer class="site-footer" th:fragment="site-footer">
     <div class="shell footer-grid">
         <div class="footer-brand">
+            <img class="footer-logo"
+                 th:src="@{/images/brand/logo-primary.jpg}"
+                 alt="Clare Life Ceremonies by Design logo.">
             <p class="eyebrow" th:text="${site.name}">Clare Brunton Life Ceremonies</p>
             <h2>Warm, modern ceremonies with heart, clarity and calm.</h2>
             <p>For weddings, funerals and life's in-between moments, Clare creates ceremonies that feel beautifully prepared, deeply personal and easy to trust.</p>
+            <p class="footer-note">Availability, travel, and ceremony details are always discussed personally after your first enquiry.</p>
         </div>
 
         <div>
@@ -16,8 +20,8 @@
                 <li><a th:href="@{/ceremonies}">Ceremonies</a></li>
                 <li><a th:href="@{/weddings}">Weddings</a></li>
                 <li><a th:href="@{/funerals}">Funerals</a></li>
-                <li><a th:href="@{/reviews}">Reviews</a></li>
                 <li><a th:href="@{/contact}">Contact</a></li>
+                <li><a th:href="@{/reviews}">Reviews</a></li>
             </ul>
         </div>
 
@@ -30,6 +34,7 @@
                     <a th:href="${site.instagramUrl}" target="_blank" rel="noreferrer">Instagram</a>
                 </li>
                 <li><a th:href="@{/privacy}">Privacy</a></li>
+                <li><a th:href="@{/contact}">Start an enquiry</a></li>
             </ul>
         </div>
     </div>

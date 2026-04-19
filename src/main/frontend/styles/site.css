@@ -173,6 +173,7 @@ blockquote {
     align-items: center;
     gap: 1rem;
     min-width: 0;
+    flex: 1 1 auto;
 }
 
 .brand-mark {
@@ -192,6 +193,20 @@ blockquote {
     font-weight: 700;
     letter-spacing: 0.12em;
     color: var(--sage-deep);
+}
+
+.brand-mark-image {
+    width: 5.25rem;
+    height: 5.25rem;
+    padding: 0.35rem;
+    overflow: hidden;
+}
+
+.brand-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
 }
 
 .brand-wording {
@@ -215,6 +230,7 @@ blockquote {
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    margin-left: auto;
 }
 
 .site-nav a {
@@ -258,6 +274,12 @@ blockquote {
     border: 1px solid var(--line);
     background: rgba(255, 250, 244, 0.76);
     color: var(--ink);
+}
+
+.header-cta {
+    flex-shrink: 0;
+    min-height: 3rem;
+    padding-inline: 1.35rem;
 }
 
 .hero,
@@ -421,6 +443,11 @@ blockquote {
     overflow: hidden;
 }
 
+.media-stage {
+    padding: 0;
+    justify-content: flex-end;
+}
+
 .visual-stage::before {
     content: "";
     position: absolute;
@@ -429,6 +456,12 @@ blockquote {
         linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(36, 31, 27, 0.22)),
         linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 40%),
         linear-gradient(135deg, #d7c3b1 0%, #efe7dd 45%, #b7c0b1 100%);
+}
+
+.media-stage::before {
+    z-index: 1;
+    background:
+        linear-gradient(180deg, rgba(19, 17, 15, 0.02) 0%, rgba(19, 17, 15, 0.16) 48%, rgba(19, 17, 15, 0.62) 100%);
 }
 
 .visual-stage-home::before {
@@ -451,11 +484,41 @@ blockquote {
         linear-gradient(135deg, #d8c2af 0%, #eee6db 45%, #c6cfbf 100%);
 }
 
+.media-stage-home::before,
+.media-stage-weddings::before {
+    background:
+        linear-gradient(180deg, rgba(18, 16, 14, 0.02) 0%, rgba(18, 16, 14, 0.12) 45%, rgba(18, 16, 14, 0.58) 100%);
+}
+
+.media-stage img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .visual-badge,
 .visual-caption,
 .visual-note {
     position: relative;
     z-index: 1;
+}
+
+.media-stage-overlay {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding: 2rem;
+}
+
+.media-stage-kicker {
+    margin-bottom: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgba(251, 246, 240, 0.78);
 }
 
 .visual-badge {
@@ -478,6 +541,30 @@ blockquote {
 .visual-note {
     max-width: 20rem;
     color: rgba(251, 246, 240, 0.88);
+}
+
+.brand-stage {
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2.5rem;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0)),
+        rgba(255, 250, 244, 0.88);
+}
+
+.brand-stage::before {
+    background:
+        radial-gradient(circle at top left, rgba(113, 128, 107, 0.12), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(157, 117, 94, 0.12), transparent 24%);
+}
+
+.brand-stage-logo {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 31rem);
+    border-radius: 22px;
+    box-shadow: 0 18px 46px rgba(36, 31, 27, 0.1);
 }
 
 .section-heading {
@@ -569,6 +656,11 @@ blockquote {
     align-items: stretch;
 }
 
+.media-stage-detail::before {
+    background:
+        linear-gradient(180deg, rgba(18, 16, 14, 0.02) 0%, rgba(18, 16, 14, 0.14) 45%, rgba(18, 16, 14, 0.58) 100%);
+}
+
 .story-copy {
     display: grid;
     gap: 1rem;
@@ -608,6 +700,15 @@ blockquote {
     border-radius: 999px;
     background: rgba(251, 246, 240, 0.14);
     font-weight: 800;
+}
+
+.process-list-light li {
+    border-bottom: 1px solid var(--line);
+}
+
+.process-list-light span {
+    background: rgba(113, 128, 107, 0.12);
+    color: var(--sage-deep);
 }
 
 .quote-grid {
@@ -650,6 +751,10 @@ blockquote {
 .contact-panel,
 .contact-form {
     padding: 2rem;
+}
+
+.contact-steps {
+    margin-top: 1.6rem;
 }
 
 .contact-list {
@@ -725,6 +830,36 @@ blockquote {
     color: var(--ink);
 }
 
+.memorial-stage {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0)),
+        rgba(255, 250, 244, 0.9);
+    border-color: rgba(113, 128, 107, 0.2);
+}
+
+.memorial-stage::before {
+    background:
+        radial-gradient(circle at top left, rgba(113, 128, 107, 0.12), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(157, 117, 94, 0.12), transparent 24%);
+}
+
+.memorial-stage h3 {
+    position: relative;
+    z-index: 1;
+    max-width: 22rem;
+    margin-bottom: 1rem;
+}
+
+.memorial-stage .eyebrow,
+.memorial-stage .visual-note {
+    position: relative;
+    z-index: 1;
+}
+
+.memorial-stage .visual-note {
+    color: var(--ink-soft);
+}
+
 .package-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -784,6 +919,31 @@ blockquote {
     border-bottom: 1px solid var(--line);
 }
 
+.wedding-gallery {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    gap: 1.5rem;
+}
+
+.gallery-card {
+    overflow: hidden;
+    min-height: 19rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: var(--shadow);
+    background: rgba(255, 250, 244, 0.7);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-card-tall {
+    min-height: 34rem;
+}
+
 .prose-copy {
     display: grid;
     gap: 1rem;
@@ -809,6 +969,18 @@ blockquote {
 .footer-brand h2 {
     margin-bottom: 1rem;
     font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.footer-logo {
+    width: min(100%, 18rem);
+    margin-bottom: 1.25rem;
+    border-radius: 18px;
+}
+
+.footer-note {
+    max-width: 28rem;
+    margin-top: 1rem;
+    color: var(--ink-muted);
 }
 
 .footer-list {
@@ -864,6 +1036,7 @@ blockquote {
     .quote-grid,
     .package-grid,
     .package-grid-two,
+    .wedding-gallery,
     .field-row {
         grid-template-columns: 1fr;
     }
@@ -886,6 +1059,10 @@ blockquote {
 
     .nav-toggle {
         display: inline-flex;
+    }
+
+    .header-cta {
+        display: none;
     }
 }
 
@@ -910,6 +1087,10 @@ blockquote {
     }
 
     .visual-stage {
+        min-height: 24rem;
+    }
+
+    .gallery-card-tall {
         min-height: 24rem;
     }
 }

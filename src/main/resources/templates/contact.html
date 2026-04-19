@@ -33,6 +33,24 @@
                 </ul>
 
                 <p class="callout">Clare will use the information you send here only to respond to your enquiry and discuss the ceremony you are asking about.</p>
+
+                <div class="contact-steps">
+                    <p class="footer-heading">What to include</p>
+                    <ul class="footer-list">
+                        <li>The kind of ceremony you are planning</li>
+                        <li>Any ideal date or timeframe you already have</li>
+                        <li>The tone or atmosphere you want the day to have</li>
+                    </ul>
+                </div>
+
+                <div class="contact-steps">
+                    <p class="footer-heading">What happens next</p>
+                    <ul class="footer-list">
+                        <li>Clare reviews the enquiry personally</li>
+                        <li>You receive a direct reply with the next step</li>
+                        <li>The conversation stays personal and no-pressure</li>
+                    </ul>
+                </div>
             </aside>
 
             <form class="contact-form" th:action="@{/contact}" th:object="${inquiryForm}" method="post" novalidate>
@@ -100,6 +118,26 @@
 
                 <button class="button" type="submit">Send enquiry</button>
             </form>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell detail-grid">
+            <article class="detail-card">
+                <p class="eyebrow">Personal reply</p>
+                <h3>You are contacting Clare directly.</h3>
+                <p>The enquiry route is designed to feel personal from the start rather than like a generic booking form.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Clear next steps</p>
+                <h3>No guesswork about what happens after you press send.</h3>
+                <p>The conversation continues clearly, with room to talk through ceremony style, timing and what support you need.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Privacy respected</p>
+                <h3>Your details are used only to respond to your enquiry.</h3>
+                <p>The site is set up to support professional, privacy-conscious communication from the beginning.</p>
+            </article>
         </div>
     </section>
 </main>

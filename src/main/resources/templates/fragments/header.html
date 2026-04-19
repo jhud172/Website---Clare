@@ -4,10 +4,14 @@
 <header class="site-header" data-site-header th:fragment="site-header(activePage)">
     <div class="shell header-inner">
         <a class="brand" th:href="@{/}" aria-label="Go to the home page">
-            <span class="brand-mark">CBLC</span>
+            <span class="brand-mark brand-mark-image">
+                <img class="brand-logo"
+                     th:src="@{/images/brand/logo-primary.jpg}"
+                     alt="Clare Life Ceremonies by Design logo.">
+            </span>
             <span class="brand-wording">
                 <span class="brand-name" th:text="${site.name}">Clare Brunton Life Ceremonies</span>
-                <span class="brand-tagline" th:text="${site.tagline}">Weddings, funerals and heartfelt ceremonies in between.</span>
+                <span class="brand-tagline">Personal ceremonies, thoughtfully written and gently delivered.</span>
             </span>
         </a>
 
@@ -22,9 +26,10 @@
             <a th:href="@{/ceremonies}" th:classappend="${activePage == 'ceremonies'} ? ' is-active'">Ceremonies</a>
             <a th:href="@{/weddings}" th:classappend="${activePage == 'weddings'} ? ' is-active'">Weddings</a>
             <a th:href="@{/funerals}" th:classappend="${activePage == 'funerals'} ? ' is-active'">Funerals</a>
-            <a th:href="@{/reviews}" th:classappend="${activePage == 'reviews'} ? ' is-active'">Reviews</a>
             <a th:href="@{/contact}" th:classappend="${activePage == 'contact'} ? ' is-active'">Contact</a>
         </nav>
+
+        <a class="button header-cta" th:href="@{/contact}">Make an enquiry</a>
     </div>
 </header>
 </body>

@@ -14,9 +14,12 @@
 
     <section class="section">
         <div class="shell split-layout split-layout-visual">
-            <div class="visual-stage visual-stage-portrait">
-                <div class="visual-note">Portrait photography will sit here beautifully once Clare's images are ready.</div>
-            </div>
+            <figure class="visual-stage brand-stage">
+                <img class="brand-stage-logo"
+                     th:src="@{/images/brand/logo-primary.jpg}"
+                     alt="Clare Life Ceremonies by Design logo framed by peacock feathers.">
+                <figcaption class="visual-note">Approved brand artwork from Clare, used here until dedicated portrait photography is ready.</figcaption>
+            </figure>
             <div class="story-copy">
                 <p>Clare Brunton Life Ceremonies has been shaped around the idea that important days deserve more than a standard script. They deserve words, pacing and presence that feel thoughtful from the first hello to the final goodbye.</p>
                 <p>After years of working in a professional public-facing role, Clare is now building a celebrant practice that feels warm, modern and deeply human. Her approach is calm and organised, but never cold. The aim is always to create a ceremony that feels personal, beautifully put together and true to the people at the centre of it.</p>
@@ -46,14 +49,46 @@
     </section>
 
     <section class="section">
-        <div class="shell split-layout">
+        <div class="shell process-layout">
             <div class="section-heading compact">
                 <p class="eyebrow">What working together feels like</p>
                 <h2>Personal support, clear communication and no unnecessary fuss.</h2>
             </div>
+            <ol class="process-list process-list-light">
+                <li>
+                    <span>01</span>
+                    <div>
+                        <h3>Listen first</h3>
+                        <p>Clare begins with the people involved, the tone you want and the atmosphere the day needs to hold.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>02</span>
+                    <div>
+                        <h3>Shape the ceremony carefully</h3>
+                        <p>Structure, language and personal details are developed with clarity rather than rushed into place.</p>
+                    </div>
+                </li>
+                <li>
+                    <span>03</span>
+                    <div>
+                        <h3>Deliver with calm confidence</h3>
+                        <p>On the day itself, the ceremony should feel well held, well paced and true to the people at its centre.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="section section-soft">
+        <div class="shell split-layout">
+            <div class="section-heading compact">
+                <p class="eyebrow">The business Clare is building</p>
+                <h2>Modern in feel, personal in tone and designed to make people feel looked after.</h2>
+            </div>
             <div class="story-copy">
-                <p>Clients can expect a process that feels guided rather than overwhelming. Clare keeps the pace clear, listens closely, and shapes each ceremony around the people involved rather than relying on generic wording.</p>
-                <p>She is available for weddings, funerals and other milestone ceremonies, with travel and ceremony details discussed personally as part of the enquiry process.</p>
+                <p>Clients should feel that they are working with someone organised, approachable and genuinely invested in getting the ceremony right.</p>
+                <p>That means warm communication, thoughtful preparation and a style that leans elegant and human rather than formal or overworked.</p>
                 <a class="button button-secondary" th:href="@{/contact}">Start a conversation</a>
             </div>
         </div>

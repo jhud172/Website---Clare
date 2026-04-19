@@ -19,9 +19,14 @@
                 <p>From the first conversation through to delivery on the day, the process is designed to feel clear and supportive. There is space for story, vows, readings, family involvement and those small details that make the whole thing feel personal.</p>
                 <p>This is a celebrant-led ceremony service. Any legal marriage requirements should always be confirmed separately where a registrar or other legal process is still required.</p>
             </div>
-            <div class="visual-stage visual-stage-weddings">
-                <div class="visual-note">Wedding imagery can be swapped for Clare's own photography or venue-led stock imagery at any point.</div>
-            </div>
+            <figure class="visual-stage media-stage media-stage-weddings">
+                <img th:src="@{/images/weddings/ceremony-portrait.jpg}"
+                     alt="A couple standing together beneath woodland lights after their ceremony.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Clare's supplied gallery</p>
+                    <p class="visual-caption">Real photography keeps the page warm, polished and rooted in the kind of atmosphere clients are booking for.</p>
+                </figcaption>
+            </figure>
         </div>
     </section>
 
@@ -67,6 +72,29 @@
     </section>
 
     <section class="section">
+        <div class="shell section-heading">
+            <p class="eyebrow">Real wedding details</p>
+            <h2>Use the supplied imagery to show the tone, intimacy and finish Clare is aiming to deliver.</h2>
+            <p class="lead">These moments land better than generic stock because they already carry the softness, woodland setting and personal detail the site is leaning into.</p>
+        </div>
+
+        <div class="shell wedding-gallery">
+            <figure class="gallery-card gallery-card-tall">
+                <img th:src="@{/images/weddings/couple-walk.jpg}"
+                     alt="A smiling bride and groom walking together after their wedding celebration.">
+            </figure>
+            <figure class="gallery-card">
+                <img th:src="@{/images/weddings/detail-rings.jpg}"
+                     alt="Close-up detail of wedding rings and hands resting together.">
+            </figure>
+            <figure class="gallery-card">
+                <img th:src="@{/images/weddings/reception-arrival.jpg}"
+                     alt="Bride and groom arriving into their reception space together.">
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
         <div class="shell process-layout">
             <div class="section-heading compact">
                 <p class="eyebrow">What to expect</p>
@@ -99,6 +127,26 @@
     </section>
 
     <section class="section section-soft">
+        <div class="shell detail-grid">
+            <article class="detail-card">
+                <p class="eyebrow">Included</p>
+                <h3>Consultation and story gathering</h3>
+                <p>The process begins with a proper conversation about the relationship, the atmosphere you want and the moments that matter most.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Included</p>
+                <h3>Bespoke script development</h3>
+                <p>Clare shapes the ceremony around your voice, your people and the way you want the day to feel in the room.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Included</p>
+                <h3>Personal delivery on the day</h3>
+                <p>The final ceremony is delivered with a calm presence and a warm tone that feels elegant rather than overdone.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section section-soft">
         <div class="shell faq-grid">
             <div class="section-heading compact">
                 <p class="eyebrow">Helpful notes</p>
@@ -126,6 +174,7 @@
             <div>
                 <p class="eyebrow">Planning a wedding?</p>
                 <h2>Tell Clare about your date, your venue and the kind of ceremony you have in mind.</h2>
+                <p>Even if you are still working out the exact format, a first conversation will help clarify what feels right.</p>
             </div>
             <a class="button" th:href="@{/contact}">Enquire about weddings</a>
         </div>
