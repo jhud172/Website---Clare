@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'ceremonies', ~{::main})}">
 <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero-editorial section-reveal-zone">
         <div class="shell page-hero-grid">
             <div>
                 <p class="eyebrow">Ceremonies</p>
@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section section-atmosphere-clay section-divider section-reveal-zone">
         <div class="shell path-grid">
             <a class="path-panel path-panel-wedding" th:href="@{/weddings}">
                 <p class="path-index">01</p>
@@ -29,7 +29,7 @@
         </div>
     </section>
 
-    <section class="section section-soft">
+    <section class="section section-soft section-atmosphere-sage section-divider section-reveal-zone">
         <div class="shell detail-grid">
             <article class="detail-card">
                 <p class="eyebrow">03</p>
@@ -49,7 +49,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section section-atmosphere-mist section-reveal-zone">
         <div class="shell cta-panel">
             <div>
                 <p class="eyebrow">Need guidance on the right fit?</p>

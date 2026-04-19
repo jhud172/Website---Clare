@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'contact', ~{::main})}">
 <main>
-    <section class="page-hero">
+    <section class="page-hero page-hero-editorial section-reveal-zone">
         <div class="shell page-hero-grid">
             <div>
                 <p class="eyebrow">Contact</p>
@@ -12,7 +12,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section section-atmosphere-clay section-divider section-reveal-zone">
         <div class="shell contact-grid">
             <aside class="contact-panel">
                 <p class="eyebrow">Direct contact</p>
@@ -53,17 +53,26 @@
                 </div>
             </aside>
 
-            <form class="contact-form" th:action="@{/contact}" th:object="${inquiryForm}" method="post" novalidate>
+            <form class="contact-form"
+                  th:action="@{/contact}"
+                  th:object="${inquiryForm}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  novalidate>
                 <div class="field-row">
                     <div class="field-group">
                         <label for="firstName">First name</label>
-                        <input id="firstName" type="text" th:field="*{firstName}">
+                        <div class="field-control" th:classappend="${#fields.hasErrors('firstName')} ? ' is-invalid'">
+                            <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name">
+                        </div>
                         <p class="field-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
                     </div>
 
                     <div class="field-group">
                         <label for="lastName">Last name</label>
-                        <input id="lastName" type="text" th:field="*{lastName}">
+                        <div class="field-control" th:classappend="${#fields.hasErrors('lastName')} ? ' is-invalid'">
+                            <input id="lastName" type="text" th:field="*{lastName}" placeholder="Last name">
+                        </div>
                         <p class="field-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
                     </div>
                 </div>
@@ -71,13 +80,17 @@
                 <div class="field-row">
                     <div class="field-group">
                         <label for="email">Email</label>
-                        <input id="email" type="email" th:field="*{email}">
+                        <div class="field-control" th:classappend="${#fields.hasErrors('email')} ? ' is-invalid'">
+                            <input id="email" type="email" th:field="*{email}" placeholder="you@example.com" autocomplete="email">
+                        </div>
                         <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
                     </div>
 
                     <div class="field-group">
                         <label for="phone">Phone</label>
-                        <input id="phone" type="text" th:field="*{phone}">
+                        <div class="field-control" th:classappend="${#fields.hasErrors('phone')} ? ' is-invalid'">
+                            <input id="phone" type="text" th:field="*{phone}" placeholder="Phone number" autocomplete="tel">
+                        </div>
                         <p class="field-error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone error</p>
                     </div>
                 </div>
@@ -85,34 +98,72 @@
                 <div class="field-row">
                     <div class="field-group">
                         <label for="serviceType">Ceremony type</label>
-                        <select id="serviceType" th:field="*{serviceType}">
-                            <option value="">Select a ceremony type</option>
-                            <option th:each="option : ${serviceOptions}" th:value="${option}" th:text="${option}">Wedding ceremony</option>
-                        </select>
+                        <div class="field-control field-control-select" th:classappend="${#fields.hasErrors('serviceType')} ? ' is-invalid'">
+                            <select id="serviceType" th:field="*{serviceType}">
+                                <option value="">Select a ceremony type</option>
+                                <option th:each="option : ${serviceOptions}" th:value="${option}" th:text="${option}">Wedding ceremony</option>
+                            </select>
+                            <span class="field-icon" aria-hidden="true">⌄</span>
+                        </div>
                         <p class="field-error" th:if="${#fields.hasErrors('serviceType')}" th:errors="*{serviceType}">Service type error</p>
                     </div>
 
                     <div class="field-group">
                         <label for="eventDate">Preferred date</label>
-                        <input id="eventDate" type="date" th:field="*{eventDate}">
+                        <div class="field-control field-control-date">
+                            <input id="eventDate" type="date" th:field="*{eventDate}">
+                            <span class="field-icon" aria-hidden="true">◷</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="field-group">
                     <label for="venue">Venue or location</label>
-                    <input id="venue" type="text" th:field="*{venue}">
+                    <div class="field-control" th:classappend="${#fields.hasErrors('venue')} ? ' is-invalid'">
+                        <input id="venue" type="text" th:field="*{venue}" placeholder="Venue, town or location">
+                    </div>
                     <p class="field-error" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}">Venue error</p>
                 </div>
 
                 <div class="field-group">
                     <label for="message">Tell Clare a little more</label>
-                    <textarea id="message" th:field="*{message}" rows="7"></textarea>
+                    <div class="field-control field-control-textarea" th:classappend="${#fields.hasErrors('message')} ? ' is-invalid'">
+                        <textarea id="message" th:field="*{message}" rows="7" placeholder="Share the kind of ceremony you are planning, the atmosphere you want, and anything Clare should know."></textarea>
+                    </div>
                     <p class="field-error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Message error</p>
                 </div>
 
-                <div class="checkbox-row">
-                    <input id="privacyAccepted" type="checkbox" th:field="*{privacyAccepted}">
-                    <label for="privacyAccepted">I am happy for my details to be used so Clare can respond to this enquiry in line with the privacy notice.</label>
+                <div class="field-group">
+                    <div class="field-heading">
+                        <label for="attachments">Add files if they help tell the story</label>
+                        <span class="field-optional">Optional</span>
+                    </div>
+                    <label class="file-dropzone" for="attachments" data-file-dropzone>
+                        <input class="file-input"
+                               id="attachments"
+                               type="file"
+                               name="attachments"
+                               accept=".jpg,.jpeg,.png,.webp,.pdf"
+                               multiple
+                               data-file-input
+                               data-file-list-target="attachment-files">
+                        <span class="file-dropzone-copy">
+                            <span class="file-dropzone-title">Share inspiration images, readings or an order of service</span>
+                            <span class="file-dropzone-note">Up to 3 files, 5 MB each. Images and PDFs only.</span>
+                        </span>
+                        <span class="file-dropzone-action">Choose files</span>
+                    </label>
+                    <p class="field-hint">Useful if you already have visual references, a draft order of service, or details you would like Clare to see.</p>
+                    <ul class="file-list" id="attachment-files" data-file-list hidden></ul>
+                    <p class="field-error" th:if="${attachmentError != null}" th:text="${attachmentError}">Attachment error</p>
+                </div>
+
+                <div class="checkbox-row" th:classappend="${#fields.hasErrors('privacyAccepted')} ? ' is-invalid'">
+                    <input class="checkbox-input" id="privacyAccepted" type="checkbox" th:field="*{privacyAccepted}">
+                    <label class="checkbox-label" for="privacyAccepted">
+                        <span class="checkbox-box" aria-hidden="true"></span>
+                        <span>I am happy for my details to be used so Clare can respond to this enquiry in line with the privacy notice.</span>
+                    </label>
                 </div>
                 <p class="field-error" th:if="${#fields.hasErrors('privacyAccepted')}" th:errors="*{privacyAccepted}">Privacy error</p>
 
@@ -121,7 +172,7 @@
         </div>
     </section>
 
-    <section class="section section-soft">
+    <section class="section section-soft section-atmosphere-sage section-reveal-zone">
         <div class="shell detail-grid">
             <article class="detail-card">
                 <p class="eyebrow">Personal reply</p>

@@ -6,6 +6,10 @@ spring:
     name: clare-ceremonies-site
   thymeleaf:
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 15MB
   mail:
     host: ${SPRING_MAIL_HOST:}
     port: ${SPRING_MAIL_PORT:587}

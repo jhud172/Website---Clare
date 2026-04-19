@@ -9,8 +9,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Service
 public class InquiryNotificationService {
@@ -29,37 +36,48 @@ public class InquiryNotificationService {
 		this.siteProperties = siteProperties;
 	}
 
-	public void handleInquiry(InquiryForm inquiryForm) {
+	public void handleInquiry(InquiryForm inquiryForm, List<MultipartFile> attachments) {
 		String recipient = StringUtils.hasText(notificationEmail) ? notificationEmail : siteProperties.getContactEmail();
 		JavaMailSender mailSender = mailSenderProvider.getIfAvailable();
+		List<MultipartFile> safeAttachments = attachments == null ? List.of() : attachments;
 
 		if (mailSender == null || !StringUtils.hasText(recipient)) {
-			logger.info("Inquiry received without outbound email configuration: {} {} / {} / {}",
+			logger.info("Inquiry received without outbound email configuration: {} {} / {} / {} / {} attachment(s)",
 					inquiryForm.getFirstName(),
 					inquiryForm.getLastName(),
 					inquiryForm.getServiceType(),
-					inquiryForm.getEmail());
+					inquiryForm.getEmail(),
+					safeAttachments.size());
 			return;
 		}
 
 		try {
-			mailSender.send(createAdminMessage(recipient, inquiryForm));
+			mailSender.send(createAdminMessage(mailSender, recipient, inquiryForm, safeAttachments));
 			mailSender.send(createConfirmationMessage(inquiryForm));
 		}
-		catch (MailException exception) {
+		catch (MailException | MessagingException exception) {
 			logger.error("Inquiry email could not be sent. Check SMTP settings before going live.", exception);
 		}
 	}
 
-	private SimpleMailMessage createAdminMessage(String recipient, InquiryForm inquiryForm) {
-		SimpleMailMessage message = new SimpleMailMessage();
+	public void handleInquiry(InquiryForm inquiryForm) {
+		handleInquiry(inquiryForm, List.of());
+	}
+
+	private MimeMessage createAdminMessage(JavaMailSender mailSender,
+			String recipient,
+			InquiryForm inquiryForm,
+			List<MultipartFile> attachments) throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, !attachments.isEmpty(), StandardCharsets.UTF_8.name());
+
 		if (StringUtils.hasText(siteProperties.getFromEmail())) {
-			message.setFrom(siteProperties.getFromEmail());
+			helper.setFrom(siteProperties.getFromEmail());
 		}
-		message.setTo(recipient);
-		message.setReplyTo(inquiryForm.getEmail());
-		message.setSubject("New ceremony enquiry: " + inquiryForm.getServiceType());
-		message.setText("""
+		helper.setTo(recipient);
+		helper.setReplyTo(inquiryForm.getEmail());
+		helper.setSubject("New ceremony enquiry: " + inquiryForm.getServiceType());
+		helper.setText("""
 				A new website enquiry has been submitted.
 
 				Name: %s %s
@@ -68,6 +86,7 @@ public class InquiryNotificationService {
 				Service: %s
 				Event date: %s
 				Venue: %s
+				Attachments: %s
 
 				Message:
 				%s
@@ -79,8 +98,17 @@ public class InquiryNotificationService {
 				inquiryForm.getServiceType(),
 				inquiryForm.getEventDate() != null ? inquiryForm.getEventDate() : "Not supplied",
 				inquiryForm.getVenue(),
+				attachments.isEmpty() ? "None" : attachments.size() + " file(s) attached",
 				inquiryForm.getMessage()
 		));
+
+		for (MultipartFile attachment : attachments) {
+			String filename = StringUtils.hasText(attachment.getOriginalFilename())
+					? StringUtils.cleanPath(attachment.getOriginalFilename())
+					: "attachment";
+			helper.addAttachment(filename, attachment);
+		}
+
 		return message;
 	}
 

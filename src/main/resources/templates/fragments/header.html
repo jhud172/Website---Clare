@@ -29,7 +29,19 @@
             <a th:href="@{/contact}" th:classappend="${activePage == 'contact'} ? ' is-active'">Contact</a>
         </nav>
 
-        <a class="button header-cta" th:href="@{/contact}">Make an enquiry</a>
+        <div class="header-actions">
+            <button class="theme-toggle"
+                    type="button"
+                    data-theme-toggle
+                    aria-pressed="false"
+                    aria-label="Switch to dark mode">
+                <span class="theme-toggle-track" aria-hidden="true">
+                    <span class="theme-toggle-thumb"></span>
+                </span>
+                <span class="theme-toggle-label" data-theme-toggle-label>Dark mode</span>
+            </button>
+            <a class="button header-cta" th:href="@{/contact}">Make an enquiry</a>
+        </div>
     </div>
 </header>
 </body>

@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class SiteController {
@@ -27,6 +31,9 @@ public class SiteController {
 			"Vow renewal",
 			"Other ceremony"
 	);
+	private static final int MAX_ATTACHMENT_COUNT = 3;
+	private static final long MAX_ATTACHMENT_SIZE_BYTES = 5L * 1024L * 1024L;
+	private static final Set<String> ALLOWED_ATTACHMENT_EXTENSIONS = Set.of("jpg", "jpeg", "png", "webp", "pdf");
 
 	private final BlogService blogService;
 
@@ -124,17 +131,36 @@ public class SiteController {
 	@PostMapping("/contact")
 	public String submitContact(@Valid @ModelAttribute("inquiryForm") InquiryForm inquiryForm,
 			BindingResult bindingResult,
+			@RequestParam(name = "attachments", required = false) List<MultipartFile> attachments,
 			Model model,
 			RedirectAttributes redirectAttributes) {
-		if (bindingResult.hasErrors()) {
+		List<MultipartFile> uploadedAttachments = normaliseAttachments(attachments);
+		String attachmentError = validateAttachments(uploadedAttachments);
+
+		if (bindingResult.hasErrors() || attachmentError != null) {
 			model.addAttribute("pageTitle", "Contact");
 			model.addAttribute("pageDescription", "Get in touch with Clare Brunton Life Ceremonies to start planning a wedding, funeral or milestone ceremony.");
+			if (attachmentError != null) {
+				model.addAttribute("attachmentError", attachmentError);
+			}
 			return "contact";
 		}
 
-		inquiryNotificationService.handleInquiry(inquiryForm);
+		if (uploadedAttachments.isEmpty()) {
+			inquiryNotificationService.handleInquiry(inquiryForm);
+		}
+		else {
+			inquiryNotificationService.handleInquiry(inquiryForm, uploadedAttachments);
+		}
 		redirectAttributes.addFlashAttribute("submittedServiceType", inquiryForm.getServiceType());
 		return "redirect:/thank-you";
+	}
+
+	public String submitContact(InquiryForm inquiryForm,
+			BindingResult bindingResult,
+			Model model,
+			RedirectAttributes redirectAttributes) {
+		return submitContact(inquiryForm, bindingResult, List.of(), model, redirectAttributes);
 	}
 
 	@GetMapping("/thank-you")
@@ -149,6 +175,34 @@ public class SiteController {
 		model.addAttribute("pageTitle", "Privacy");
 		model.addAttribute("pageDescription", "Privacy information for Clare Brunton Life Ceremonies and how enquiry details are handled.");
 		return "privacy";
+	}
+
+	private List<MultipartFile> normaliseAttachments(List<MultipartFile> attachments) {
+		if (attachments == null) {
+			return List.of();
+		}
+		return attachments.stream()
+				.filter(file -> file != null && !file.isEmpty())
+				.toList();
+	}
+
+	private String validateAttachments(List<MultipartFile> attachments) {
+		if (attachments.size() > MAX_ATTACHMENT_COUNT) {
+			return "Please upload up to 3 files only.";
+		}
+
+		for (MultipartFile attachment : attachments) {
+			if (attachment.getSize() > MAX_ATTACHMENT_SIZE_BYTES) {
+				return "Each file needs to be 5 MB or smaller.";
+			}
+
+			String extension = StringUtils.getFilenameExtension(attachment.getOriginalFilename());
+			if (!StringUtils.hasText(extension) || !ALLOWED_ATTACHMENT_EXTENSIONS.contains(extension.toLowerCase())) {
+				return "Please use JPG, PNG, WEBP or PDF files only.";
+			}
+		}
+
+		return null;
 	}
 
 }
