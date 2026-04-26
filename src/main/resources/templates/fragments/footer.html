@@ -5,23 +5,26 @@
     <div class="shell footer-grid">
         <div class="footer-brand">
             <img class="footer-logo"
-                 th:src="@{/images/brand/logo-primary.jpg}"
+                 th:src="@{/images/brand/logo-primary-elegant.svg}"
                  alt="Clare Life Ceremonies by Design logo.">
-            <p class="eyebrow" th:text="${site.name}">Clare Brunton Life Ceremonies</p>
-            <h2>Warm, modern ceremonies with heart, clarity and calm.</h2>
-            <p>For weddings, funerals and life's in-between moments, Clare creates ceremonies that feel beautifully prepared, deeply personal and easy to trust.</p>
+            <p class="eyebrow" th:text="${site.name}">Clare Life Ceremonies</p>
+            <p class="footer-tagline" th:text="${site.tagline}">By Design</p>
+            <h2>Warm, elegant ceremonies that still feel personal and easy to connect with.</h2>
+            <p>For weddings, funerals and life's meaningful milestones, Clare creates ceremonies with warmth, clarity and a thoughtful premium finish.</p>
             <p class="footer-note">Availability, travel, and ceremony details are always discussed personally after your first enquiry.</p>
         </div>
 
         <div>
             <p class="footer-heading">Explore</p>
             <ul class="footer-list">
+                <li><a th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/about}">About</a></li>
-                <li><a th:href="@{/ceremonies}">Ceremonies</a></li>
+                <li><a th:href="@{/services}">Services</a></li>
                 <li><a th:href="@{/weddings}">Weddings</a></li>
                 <li><a th:href="@{/funerals}">Funerals</a></li>
                 <li><a th:href="@{/contact}">Contact</a></li>
                 <li><a th:href="@{/reviews}">Reviews</a></li>
+                <li><a th:href="@{/privacy}">Privacy Policy</a></li>
             </ul>
         </div>
 
@@ -33,6 +36,7 @@
                 <li th:if="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">
                     <a th:href="${site.instagramUrl}" target="_blank" rel="noreferrer">Instagram</a>
                 </li>
+                <li th:unless="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">Instagram coming soon</li>
                 <li><a th:href="@{/privacy}">Privacy</a></li>
                 <li><a th:href="@{/contact}">Start an enquiry</a></li>
             </ul>

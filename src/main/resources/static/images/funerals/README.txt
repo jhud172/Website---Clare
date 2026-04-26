@@ -1,0 +1,1 @@
+Funeral Image Placeholders\n\nAdd funeral-specific supporting images here when available, for example:\n- funeral-hero-dark-tones.jpg\n- flowers-detail.jpg\n\nCurrent funeral imagery is temporarily sourced from /images/clare/.\n

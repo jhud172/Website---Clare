@@ -23,8 +23,8 @@ spring:
             enable: ${SPRING_MAIL_SMTP_STARTTLS_ENABLE:true}
 
 site:
-  name: ${SITE_NAME:Clare Brunton Life Ceremonies}
-  tagline: ${SITE_TAGLINE:Weddings, funerals and heartfelt ceremonies in between.}
+  name: ${SITE_NAME:Clare Life Ceremonies}
+  tagline: ${SITE_TAGLINE:By Design}
   contact-email: ${SITE_CONTACT_EMAIL:clarebruntoncelebrant@gmail.com}
   phone-number: ${SITE_PHONE_NUMBER:07885 428304}
   instagram-url: ${SITE_INSTAGRAM_URL:}

@@ -51,22 +51,22 @@ public class SiteController {
 
 	@GetMapping("/")
 	public String home(Model model) {
-		model.addAttribute("pageTitle", "Warm, modern ceremonies for life's biggest moments");
-		model.addAttribute("pageDescription", "Clare Brunton Life Ceremonies offers warm, personal weddings, funerals and milestone ceremonies with a premium, modern feel.");
+		model.addAttribute("pageTitle", "Warm, elegant ceremonies by design");
+		model.addAttribute("pageDescription", "Clare Life Ceremonies offers warm, personal weddings, funerals and life ceremonies with a modern premium feel.");
 		return "home";
 	}
 
 	@GetMapping("/about")
 	public String about(Model model) {
-		model.addAttribute("pageTitle", "About Clare");
-		model.addAttribute("pageDescription", "Meet Clare and discover the calm, caring approach behind Clare Brunton Life Ceremonies.");
+		model.addAttribute("pageTitle", "Meet Clare");
+		model.addAttribute("pageDescription", "Meet Clare and discover the calm, caring approach behind Clare Life Ceremonies.");
 		return "about";
 	}
 
-	@GetMapping("/ceremonies")
-	public String ceremonies(Model model) {
-		model.addAttribute("pageTitle", "Ceremonies");
-		model.addAttribute("pageDescription", "An overview of Clare's wedding, funeral and milestone ceremony services.");
+	@GetMapping("/services")
+	public String services(Model model) {
+		model.addAttribute("pageTitle", "Services");
+		model.addAttribute("pageDescription", "An overview of Clare's wedding, funeral and life ceremony services.");
 		return "ceremonies";
 	}
 
@@ -79,7 +79,7 @@ public class SiteController {
 
 	@GetMapping("/funerals")
 	public String funerals(Model model) {
-		model.addAttribute("pageTitle", "Funerals and memorials");
+		model.addAttribute("pageTitle", "Funerals");
 		model.addAttribute("pageDescription", "Thoughtful funeral and memorial ceremonies created with warmth, clarity and care.");
 		return "funerals";
 	}
@@ -91,9 +91,9 @@ public class SiteController {
 		return "reviews";
 	}
 
-	@GetMapping("/services")
-	public String servicesRedirect() {
-		return "redirect:/ceremonies";
+	@GetMapping("/ceremonies")
+	public String ceremoniesRedirect() {
+		return "redirect:/services";
 	}
 
 	@GetMapping("/blog")
@@ -124,7 +124,7 @@ public class SiteController {
 			model.addAttribute("inquiryForm", new InquiryForm());
 		}
 		model.addAttribute("pageTitle", "Contact");
-		model.addAttribute("pageDescription", "Get in touch with Clare Brunton Life Ceremonies to start planning a wedding, funeral or milestone ceremony.");
+		model.addAttribute("pageDescription", "Get in touch with Clare Life Ceremonies to start planning a wedding, funeral or milestone ceremony.");
 		return "contact";
 	}
 
@@ -139,7 +139,7 @@ public class SiteController {
 
 		if (bindingResult.hasErrors() || attachmentError != null) {
 			model.addAttribute("pageTitle", "Contact");
-			model.addAttribute("pageDescription", "Get in touch with Clare Brunton Life Ceremonies to start planning a wedding, funeral or milestone ceremony.");
+			model.addAttribute("pageDescription", "Get in touch with Clare Life Ceremonies to start planning a wedding, funeral or milestone ceremony.");
 			if (attachmentError != null) {
 				model.addAttribute("attachmentError", attachmentError);
 			}
@@ -166,14 +166,14 @@ public class SiteController {
 	@GetMapping("/thank-you")
 	public String thankYou(Model model) {
 		model.addAttribute("pageTitle", "Thank you for getting in touch");
-		model.addAttribute("pageDescription", "Confirmation page after submitting an enquiry to Clare Brunton Life Ceremonies.");
+		model.addAttribute("pageDescription", "Confirmation page after submitting an enquiry to Clare Life Ceremonies.");
 		return "thank-you";
 	}
 
 	@GetMapping("/privacy")
 	public String privacy(Model model) {
-		model.addAttribute("pageTitle", "Privacy");
-		model.addAttribute("pageDescription", "Privacy information for Clare Brunton Life Ceremonies and how enquiry details are handled.");
+		model.addAttribute("pageTitle", "Privacy Policy");
+		model.addAttribute("pageDescription", "How Clare Life Ceremonies collects, stores and uses personal information.");
 		return "privacy";
 	}
 

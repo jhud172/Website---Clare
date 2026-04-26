@@ -21,7 +21,9 @@ const revealSelectors = [
     ".faq-list article",
     ".contact-panel",
     ".contact-form",
-    ".cta-panel"
+    ".cta-panel",
+    ".policy-index",
+    ".policy-card"
 ];
 
 const applyTheme = (theme) => {
@@ -40,6 +42,10 @@ const applyTheme = (theme) => {
 };
 
 const resolveTheme = () => {
+    if (!themeToggle) {
+        return "light";
+    }
+
     const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
     if (storedTheme === "light" || storedTheme === "dark") {
         return storedTheme;
@@ -190,3 +196,542 @@ fileInputs.forEach((input) => {
     syncFiles();
     input.addEventListener("change", syncFiles);
 });
+
+const formatPaddedNumber = (value) => String(value).padStart(2, "0");
+
+const parseIsoDate = (value) => {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        return null;
+    }
+
+    const [year, month, day] = value.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+
+    if (
+        Number.isNaN(date.getTime())
+        || date.getFullYear() !== year
+        || date.getMonth() !== month - 1
+        || date.getDate() !== day
+    ) {
+        return null;
+    }
+
+    return date;
+};
+
+const toIsoDate = (date) => `${date.getFullYear()}-${formatPaddedNumber(date.getMonth() + 1)}-${formatPaddedNumber(date.getDate())}`;
+
+const formatDisplayDate = (date) => `${formatPaddedNumber(date.getDate())}/${formatPaddedNumber(date.getMonth() + 1)}/${date.getFullYear()}`;
+
+const isSameDay = (left, right) => left && right
+    && left.getFullYear() === right.getFullYear()
+    && left.getMonth() === right.getMonth()
+    && left.getDate() === right.getDate();
+
+const formatMonthLabel = (date) => new Intl.DateTimeFormat("en-GB", {
+    month: "long",
+    year: "numeric"
+}).format(date);
+
+const customFieldRoots = Array.from(document.querySelectorAll("[data-choice-select], [data-date-picker]"));
+
+const closeCustomField = (root) => {
+    const trigger = root.querySelector("[data-choice-trigger], [data-date-trigger]");
+    const popup = root.querySelector("[data-choice-popup], [data-date-popup]");
+
+    root.classList.remove("is-open");
+
+    if (trigger) {
+        trigger.setAttribute("aria-expanded", "false");
+    }
+
+    if (popup) {
+        popup.hidden = true;
+    }
+};
+
+const openCustomField = (root) => {
+    customFieldRoots.forEach((candidate) => {
+        if (candidate !== root) {
+            closeCustomField(candidate);
+        }
+    });
+
+    const trigger = root.querySelector("[data-choice-trigger], [data-date-trigger]");
+    const popup = root.querySelector("[data-choice-popup], [data-date-popup]");
+
+    root.classList.add("is-open");
+
+    if (trigger) {
+        trigger.setAttribute("aria-expanded", "true");
+    }
+
+    if (popup) {
+        popup.hidden = false;
+    }
+};
+
+document.addEventListener("click", (event) => {
+    customFieldRoots.forEach((root) => {
+        if (!root.contains(event.target)) {
+            closeCustomField(root);
+        }
+    });
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+        return;
+    }
+
+    customFieldRoots.forEach((root) => {
+        if (root.classList.contains("is-open")) {
+            closeCustomField(root);
+        }
+    });
+});
+
+document.querySelectorAll("[data-choice-select]").forEach((root) => {
+    const input = root.querySelector("[data-choice-input]");
+    const trigger = root.querySelector("[data-choice-trigger]");
+    const label = root.querySelector("[data-choice-label]");
+    const options = Array.from(root.querySelectorAll("[data-choice-option]"));
+    const placeholder = trigger?.dataset.choicePlaceholder || "";
+
+    if (!input || !trigger || !label || options.length === 0) {
+        return;
+    }
+
+    const syncChoice = () => {
+        const selected = options.find((option) => option.dataset.value === input.value);
+        const labelText = selected ? selected.textContent.trim() : placeholder;
+
+        label.textContent = labelText;
+        trigger.classList.toggle("is-placeholder", !selected || !input.value);
+
+        options.forEach((option) => {
+            const isSelected = option.dataset.value === input.value;
+            option.classList.toggle("is-selected", isSelected);
+            option.setAttribute("aria-selected", String(isSelected));
+        });
+    };
+
+    trigger.addEventListener("click", () => {
+        if (root.classList.contains("is-open")) {
+            closeCustomField(root);
+            return;
+        }
+
+        openCustomField(root);
+    });
+
+    options.forEach((option) => {
+        option.addEventListener("click", () => {
+            input.value = option.dataset.value || "";
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+            syncChoice();
+            closeCustomField(root);
+            trigger.focus();
+        });
+    });
+
+    syncChoice();
+});
+
+document.querySelectorAll("[data-date-picker]").forEach((root) => {
+    const input = root.querySelector("[data-date-input]");
+    const trigger = root.querySelector("[data-date-trigger]");
+    const label = root.querySelector("[data-date-label]");
+    const monthLabel = root.querySelector("[data-date-month]");
+    const grid = root.querySelector("[data-date-grid]");
+    const prevButton = root.querySelector('[data-date-nav="prev"]');
+    const nextButton = root.querySelector('[data-date-nav="next"]');
+    const clearButton = root.querySelector('[data-date-action="clear"]');
+    const todayButton = root.querySelector('[data-date-action="today"]');
+    const placeholder = trigger?.dataset.datePlaceholder || "dd/mm/yyyy";
+
+    if (!input || !trigger || !label || !monthLabel || !grid || !prevButton || !nextButton || !clearButton || !todayButton) {
+        return;
+    }
+
+    let selectedDate = parseIsoDate(input.value);
+    let viewDate = selectedDate ? new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1) : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+
+    const syncDateLabel = () => {
+        selectedDate = parseIsoDate(input.value);
+        label.textContent = selectedDate ? formatDisplayDate(selectedDate) : placeholder;
+        trigger.classList.toggle("is-placeholder", !selectedDate);
+    };
+
+    const renderCalendar = () => {
+        monthLabel.textContent = formatMonthLabel(viewDate);
+        grid.innerHTML = "";
+
+        const today = new Date();
+        const monthStart = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1);
+        const weekdayOffset = (monthStart.getDay() + 6) % 7;
+        const firstVisibleDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1 - weekdayOffset);
+
+        for (let index = 0; index < 42; index += 1) {
+            const date = new Date(firstVisibleDate.getFullYear(), firstVisibleDate.getMonth(), firstVisibleDate.getDate() + index);
+            const dayButton = document.createElement("button");
+
+            dayButton.type = "button";
+            dayButton.className = "calendar-day";
+            dayButton.textContent = String(date.getDate());
+            dayButton.dataset.dateValue = toIsoDate(date);
+            dayButton.setAttribute("role", "gridcell");
+
+            if (date.getMonth() !== viewDate.getMonth()) {
+                dayButton.classList.add("is-outside-month");
+            }
+
+            if (isSameDay(date, today)) {
+                dayButton.classList.add("is-today");
+            }
+
+            if (selectedDate && isSameDay(date, selectedDate)) {
+                dayButton.classList.add("is-selected");
+            }
+
+            dayButton.addEventListener("click", () => {
+                input.value = dayButton.dataset.dateValue;
+                input.dispatchEvent(new Event("change", { bubbles: true }));
+                syncDateLabel();
+                viewDate = new Date(date.getFullYear(), date.getMonth(), 1);
+                renderCalendar();
+                closeCustomField(root);
+                trigger.focus();
+            });
+
+            grid.appendChild(dayButton);
+        }
+    };
+
+    trigger.addEventListener("click", () => {
+        if (root.classList.contains("is-open")) {
+            closeCustomField(root);
+            return;
+        }
+
+        const currentValue = parseIsoDate(input.value);
+        const today = new Date();
+        viewDate = currentValue
+            ? new Date(currentValue.getFullYear(), currentValue.getMonth(), 1)
+            : new Date(today.getFullYear(), today.getMonth(), 1);
+        renderCalendar();
+        openCustomField(root);
+    });
+
+    prevButton.addEventListener("click", () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1);
+        renderCalendar();
+    });
+
+    nextButton.addEventListener("click", () => {
+        viewDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1);
+        renderCalendar();
+    });
+
+    clearButton.addEventListener("click", () => {
+        input.value = "";
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+        syncDateLabel();
+        renderCalendar();
+        closeCustomField(root);
+        trigger.focus();
+    });
+
+    todayButton.addEventListener("click", () => {
+        const today = new Date();
+
+        input.value = toIsoDate(today);
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+        syncDateLabel();
+        viewDate = new Date(today.getFullYear(), today.getMonth(), 1);
+        renderCalendar();
+        closeCustomField(root);
+        trigger.focus();
+    });
+
+    syncDateLabel();
+    renderCalendar();
+});
+
+const contactForm = document.querySelector("[data-contact-form]");
+
+if (contactForm) {
+    const fieldOrder = [
+        "fullName",
+        "email",
+        "phone",
+        "serviceType",
+        "eventDate",
+        "venue",
+        "message",
+        "privacyAccepted"
+    ];
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const siteHeader = document.querySelector(".site-header");
+
+    const getFieldWrapper = (fieldName) => contactForm.querySelector(`[data-form-field="${fieldName}"]`);
+
+    const getFieldControl = (fieldName) => {
+        const wrapper = getFieldWrapper(fieldName);
+
+        if (!wrapper) {
+            return null;
+        }
+
+        if (fieldName === "privacyAccepted") {
+            return wrapper;
+        }
+
+        return wrapper.querySelector(".field-control, .form-choice") || wrapper;
+    };
+
+    const getErrorNode = (fieldName) => {
+        const wrapper = getFieldWrapper(fieldName);
+
+        if (!wrapper) {
+            return null;
+        }
+
+        if (fieldName === "privacyAccepted") {
+            const existing = wrapper.nextElementSibling;
+
+            if (existing && existing.classList.contains("field-error")) {
+                return existing;
+            }
+
+            const created = document.createElement("p");
+            created.className = "field-error";
+            created.hidden = true;
+            wrapper.insertAdjacentElement("afterend", created);
+            return created;
+        }
+
+        const existing = wrapper.querySelector(".field-error");
+
+        if (existing) {
+            return existing;
+        }
+
+        const created = document.createElement("p");
+        created.className = "field-error";
+        created.hidden = true;
+        wrapper.appendChild(created);
+        return created;
+    };
+
+    const clearFieldError = (fieldName) => {
+        const wrapper = getFieldWrapper(fieldName);
+        const control = getFieldControl(fieldName);
+        const errorNode = getErrorNode(fieldName);
+
+        if (wrapper) {
+            wrapper.classList.remove("is-invalid");
+        }
+
+        if (control && control !== wrapper) {
+            control.classList.remove("is-invalid");
+        }
+
+        if (errorNode) {
+            errorNode.textContent = "";
+            errorNode.hidden = true;
+        }
+    };
+
+    const setFieldError = (fieldName, message) => {
+        const wrapper = getFieldWrapper(fieldName);
+        const control = getFieldControl(fieldName);
+        const errorNode = getErrorNode(fieldName);
+
+        if (wrapper) {
+            wrapper.classList.add("is-invalid");
+        }
+
+        if (control && control !== wrapper) {
+            control.classList.add("is-invalid");
+        }
+
+        if (errorNode) {
+            errorNode.textContent = message;
+            errorNode.hidden = false;
+        }
+    };
+
+    const todayAtMidnight = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return today;
+    };
+
+    const fieldConfig = {
+        fullName: {
+            input: contactForm.querySelector("#fullName"),
+            focusTarget: contactForm.querySelector("#fullName"),
+            validate: (value) => value.trim() ? "" : "Please add your full name."
+        },
+        email: {
+            input: contactForm.querySelector("#email"),
+            focusTarget: contactForm.querySelector("#email"),
+            validate: (value) => {
+                const trimmed = value.trim();
+
+                if (!trimmed) {
+                    return "Please add an email address.";
+                }
+
+                return emailPattern.test(trimmed) ? "" : "Please use a valid email address.";
+            }
+        },
+        phone: {
+            input: contactForm.querySelector("#phone"),
+            focusTarget: contactForm.querySelector("#phone"),
+            validate: (value) => value.trim() ? "" : "Please add a phone number."
+        },
+        serviceType: {
+            input: contactForm.querySelector("#serviceType"),
+            focusTarget: contactForm.querySelector("[data-choice-trigger]"),
+            validate: (value) => value.trim() ? "" : "Please choose the type of ceremony."
+        },
+        eventDate: {
+            input: contactForm.querySelector("#eventDate"),
+            focusTarget: contactForm.querySelector("[data-date-trigger]"),
+            validate: (value) => {
+                if (!value.trim()) {
+                    return "Please add a preferred date.";
+                }
+
+                const parsed = parseIsoDate(value);
+
+                if (!parsed) {
+                    return "Please add a valid preferred date.";
+                }
+
+                return parsed < todayAtMidnight() ? "Please choose a date that is today or later." : "";
+            }
+        },
+        venue: {
+            input: contactForm.querySelector("#venue"),
+            focusTarget: contactForm.querySelector("#venue"),
+            validate: (value) => value.trim() ? "" : "Please add the venue or location."
+        },
+        message: {
+            input: contactForm.querySelector("#message"),
+            focusTarget: contactForm.querySelector("#message"),
+            validate: (value) => {
+                const trimmed = value.trim();
+
+                if (!trimmed) {
+                    return "Please tell us a little about the ceremony.";
+                }
+
+                return trimmed.length >= 20 ? "" : "Please give between 20 and 2000 characters.";
+            }
+        },
+        privacyAccepted: {
+            input: contactForm.querySelector("#privacyAccepted"),
+            focusTarget: contactForm.querySelector(".checkbox-label"),
+            validate: (value, input) => input && input.checked ? "" : "Please confirm that you are happy for us to handle your details."
+        }
+    };
+
+    const validateField = (fieldName) => {
+        const config = fieldConfig[fieldName];
+
+        if (!config || !config.input) {
+            return "";
+        }
+
+        return config.validate(config.input.value || "", config.input);
+    };
+
+    const focusAndScrollToField = (fieldName) => {
+        const wrapper = getFieldWrapper(fieldName);
+        const focusTarget = fieldConfig[fieldName]?.focusTarget;
+        const headerOffset = siteHeader ? siteHeader.offsetHeight : 92;
+
+        if (wrapper) {
+            const top = wrapper.getBoundingClientRect().top + window.scrollY - headerOffset - 24;
+
+            window.scrollTo({
+                top: Math.max(0, top),
+                behavior: "smooth"
+            });
+        }
+
+        if (focusTarget && typeof focusTarget.focus === "function") {
+            window.setTimeout(() => {
+                focusTarget.focus({ preventScroll: true });
+            }, 180);
+        }
+    };
+
+    fieldOrder.forEach((fieldName) => {
+        const config = fieldConfig[fieldName];
+
+        if (!config?.input) {
+            return;
+        }
+
+        const syncValidity = () => {
+            const errorMessage = validateField(fieldName);
+
+            if (!errorMessage) {
+                clearFieldError(fieldName);
+                return;
+            }
+
+            if (getFieldWrapper(fieldName)?.classList.contains("is-invalid")) {
+                setFieldError(fieldName, errorMessage);
+            }
+        };
+
+        config.input.addEventListener("input", syncValidity);
+        config.input.addEventListener("change", syncValidity);
+    });
+
+    const privacyRow = getFieldWrapper("privacyAccepted");
+    const privacyInput = fieldConfig.privacyAccepted.input;
+
+    if (privacyRow && privacyInput) {
+        privacyRow.addEventListener("click", (event) => {
+            if (event.target.closest("a") || event.target.closest("label") || event.target === privacyInput) {
+                return;
+            }
+
+            event.preventDefault();
+            privacyInput.checked = !privacyInput.checked;
+            privacyInput.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+    }
+
+    contactForm.addEventListener("submit", (event) => {
+        if (privacyInput && !privacyInput.checked) {
+            privacyInput.checked = true;
+            privacyInput.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+
+        fieldOrder.forEach((fieldName) => clearFieldError(fieldName));
+
+        const invalidFields = fieldOrder
+            .map((fieldName) => ({ fieldName, message: validateField(fieldName) }))
+            .filter((entry) => entry.message);
+
+        if (invalidFields.length === 0) {
+            return;
+        }
+
+        event.preventDefault();
+
+        invalidFields.forEach(({ fieldName, message }) => {
+            setFieldError(fieldName, message);
+        });
+
+        focusAndScrollToField(invalidFields[0].fieldName);
+    });
+}

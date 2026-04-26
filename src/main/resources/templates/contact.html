@@ -3,43 +3,50 @@
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'contact', ~{::main})}">
 <main>
     <section class="page-hero page-hero-editorial section-reveal-zone">
-        <div class="shell page-hero-grid">
-            <div>
-                <p class="eyebrow">Contact</p>
-                <h1>Start with a simple message and Clare will come back to you personally.</h1>
-            </div>
-            <p class="lead">Whether you are planning a wedding, arranging a funeral, or enquiring about another ceremony, the first step is simply getting in touch.</p>
+        <div class="shell section-heading">
+            <p class="eyebrow">Contact</p>
+            <h1>Let's talk about your ceremony</h1>
+            <p class="lead">Whether you're planning a wedding, funeral or special life ceremony, Clare would love to hear from you.</p>
         </div>
     </section>
 
     <section class="section section-atmosphere-clay section-divider section-reveal-zone">
         <div class="shell contact-grid">
             <aside class="contact-panel">
-                <p class="eyebrow">Direct contact</p>
-                <h2>Prefer to reach out directly?</h2>
+                <p class="eyebrow">Contact details</p>
+                <h2>Start with whichever route feels easiest.</h2>
+                <p>You can send a message through the form or contact Clare directly by email or phone. The response stays personal, clear and no-pressure.</p>
                 <ul class="contact-list">
                     <li>
                         <span>Email</span>
                         <a th:href="'mailto:' + ${site.contactEmail}" th:text="${site.contactEmail}">clarebruntoncelebrant@gmail.com</a>
                     </li>
-                    <li>
+                    <li th:if="${site.phoneNumber != null and !#strings.isEmpty(site.phoneNumber)}">
                         <span>Phone</span>
                         <a th:href="'tel:' + ${site.phoneNumber}" th:text="${site.phoneNumber}">07885 428304</a>
+                    </li>
+                    <li th:unless="${site.phoneNumber != null and !#strings.isEmpty(site.phoneNumber)}">
+                        <span>Phone</span>
+                        <span>Phone number to be confirmed</span>
                     </li>
                     <li th:if="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">
                         <span>Instagram</span>
                         <a th:href="${site.instagramUrl}" target="_blank" rel="noreferrer">Open profile</a>
                     </li>
+                    <li th:unless="${site.instagramUrl != null and !#strings.isEmpty(site.instagramUrl)}">
+                        <span>Instagram</span>
+                        <span>Instagram coming soon</span>
+                    </li>
                 </ul>
 
-                <p class="callout">Clare will use the information you send here only to respond to your enquiry and discuss the ceremony you are asking about.</p>
+                <p class="callout">Clare will only use the information you send here to respond to your enquiry and discuss the ceremony you are asking about.</p>
 
                 <div class="contact-steps">
                     <p class="footer-heading">What to include</p>
                     <ul class="footer-list">
-                        <li>The kind of ceremony you are planning</li>
-                        <li>Any ideal date or timeframe you already have</li>
-                        <li>The tone or atmosphere you want the day to have</li>
+                        <li>The type of ceremony you are planning</li>
+                        <li>Your preferred date or timeframe if known</li>
+                        <li>Your venue, location or area</li>
                     </ul>
                 </div>
 
@@ -48,37 +55,32 @@
                     <ul class="footer-list">
                         <li>Clare reviews the enquiry personally</li>
                         <li>You receive a direct reply with the next step</li>
-                        <li>The conversation stays personal and no-pressure</li>
+                        <li>The conversation stays warm, personal and straightforward</li>
                     </ul>
                 </div>
             </aside>
 
             <form class="contact-form"
+                data-contact-form
                   th:action="@{/contact}"
                   th:object="${inquiryForm}"
                   method="post"
                   enctype="multipart/form-data"
                   novalidate>
-                <div class="field-row">
-                    <div class="field-group">
-                        <label for="firstName">First name</label>
-                        <div class="field-control" th:classappend="${#fields.hasErrors('firstName')} ? ' is-invalid'">
-                            <input id="firstName" type="text" th:field="*{firstName}" placeholder="First name">
-                        </div>
-                        <p class="field-error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name error</p>
+                <div class="story-copy">
+                    <p class="eyebrow">Send an enquiry</p>
+                    <h2>A clear form structure that is ready for validation and live handling.</h2>
+                </div>
+                <div class="field-group" data-form-field="fullName">
+                    <label for="fullName">Full name</label>
+                    <div class="field-control" th:classappend="${#fields.hasErrors('fullName')} ? ' is-invalid'">
+                        <input id="fullName" type="text" th:field="*{fullName}" placeholder="Your full name" autocomplete="name">
                     </div>
-
-                    <div class="field-group">
-                        <label for="lastName">Last name</label>
-                        <div class="field-control" th:classappend="${#fields.hasErrors('lastName')} ? ' is-invalid'">
-                            <input id="lastName" type="text" th:field="*{lastName}" placeholder="Last name">
-                        </div>
-                        <p class="field-error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name error</p>
-                    </div>
+                    <p class="field-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Full name error</p>
                 </div>
 
                 <div class="field-row">
-                    <div class="field-group">
+                    <div class="field-group" data-form-field="email">
                         <label for="email">Email</label>
                         <div class="field-control" th:classappend="${#fields.hasErrors('email')} ? ' is-invalid'">
                             <input id="email" type="email" th:field="*{email}" placeholder="you@example.com" autocomplete="email">
@@ -86,7 +88,7 @@
                         <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
                     </div>
 
-                    <div class="field-group">
+                    <div class="field-group" data-form-field="phone">
                         <label for="phone">Phone</label>
                         <div class="field-control" th:classappend="${#fields.hasErrors('phone')} ? ' is-invalid'">
                             <input id="phone" type="text" th:field="*{phone}" placeholder="Phone number" autocomplete="tel">
@@ -96,28 +98,77 @@
                 </div>
 
                 <div class="field-row">
-                    <div class="field-group">
-                        <label for="serviceType">Ceremony type</label>
-                        <div class="field-control field-control-select" th:classappend="${#fields.hasErrors('serviceType')} ? ' is-invalid'">
-                            <select id="serviceType" th:field="*{serviceType}">
-                                <option value="">Select a ceremony type</option>
-                                <option th:each="option : ${serviceOptions}" th:value="${option}" th:text="${option}">Wedding ceremony</option>
-                            </select>
-                            <span class="field-icon" aria-hidden="true">⌄</span>
+                    <div class="field-group" data-form-field="serviceType">
+                        <p class="field-label" id="serviceTypeLabel">Ceremony type</p>
+                        <div class="form-choice" data-choice-select th:classappend="${#fields.hasErrors('serviceType')} ? ' is-invalid'">
+                            <input id="serviceType" type="hidden" th:field="*{serviceType}" data-choice-input>
+                            <button class="field-control field-control-button field-control-select" type="button"
+                                    data-choice-trigger
+                                    aria-haspopup="listbox"
+                                    aria-expanded="false"
+                                    aria-controls="serviceTypeList"
+                                    aria-labelledby="serviceTypeLabel serviceTypeValue"
+                                    data-choice-placeholder="Select a ceremony type">
+                                <span class="field-control-text" id="serviceTypeValue" data-choice-label>Select a ceremony type</span>
+                                <span class="field-icon" aria-hidden="true">⌄</span>
+                            </button>
+                            <div class="field-popup field-popup-select" data-choice-popup hidden>
+                                <ul class="field-option-list" id="serviceTypeList" role="listbox" aria-labelledby="serviceTypeLabel">
+                                    <li>
+                                        <button class="field-option" type="button" data-choice-option data-value="" role="option">Select a ceremony type</button>
+                                    </li>
+                                    <li th:each="option : ${serviceOptions}">
+                                        <button class="field-option" type="button" data-choice-option th:attr="data-value=${option}" th:text="${option}" role="option">Wedding ceremony</button>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                         <p class="field-error" th:if="${#fields.hasErrors('serviceType')}" th:errors="*{serviceType}">Service type error</p>
                     </div>
 
-                    <div class="field-group">
-                        <label for="eventDate">Preferred date</label>
-                        <div class="field-control field-control-date">
-                            <input id="eventDate" type="date" th:field="*{eventDate}">
-                            <span class="field-icon" aria-hidden="true">◷</span>
+                    <div class="field-group" data-form-field="eventDate">
+                        <p class="field-label" id="eventDateLabel">Preferred date</p>
+                        <div class="form-choice" data-date-picker th:classappend="${#fields.hasErrors('eventDate')} ? ' is-invalid'">
+                            <input id="eventDate" type="hidden" th:field="*{eventDate}" data-date-input>
+                            <button class="field-control field-control-button field-control-date" type="button"
+                                    data-date-trigger
+                                    aria-haspopup="dialog"
+                                    aria-expanded="false"
+                                    aria-controls="eventDatePicker"
+                                    aria-labelledby="eventDateLabel eventDateValue"
+                                    data-date-placeholder="dd/mm/yyyy">
+                                <span class="field-control-text" id="eventDateValue" data-date-label>dd/mm/yyyy</span>
+                                <span class="field-icon" aria-hidden="true">◷</span>
+                            </button>
+                            <div class="field-popup field-popup-date" id="eventDatePicker" data-date-popup hidden>
+                                <div class="date-picker-shell">
+                                    <div class="date-picker-header">
+                                        <button class="date-picker-nav" type="button" data-date-nav="prev" aria-label="Previous month">‹</button>
+                                        <p class="date-picker-month" data-date-month>Month Year</p>
+                                        <button class="date-picker-nav" type="button" data-date-nav="next" aria-label="Next month">›</button>
+                                    </div>
+                                    <div class="date-picker-weekdays" aria-hidden="true">
+                                        <span>Mo</span>
+                                        <span>Tu</span>
+                                        <span>We</span>
+                                        <span>Th</span>
+                                        <span>Fr</span>
+                                        <span>Sa</span>
+                                        <span>Su</span>
+                                    </div>
+                                    <div class="date-picker-grid" data-date-grid role="grid" aria-labelledby="eventDateLabel"></div>
+                                    <div class="date-picker-actions">
+                                        <button class="date-picker-action" type="button" data-date-action="clear">Clear</button>
+                                        <button class="date-picker-action" type="button" data-date-action="today">Today</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <p class="field-error" th:if="${#fields.hasErrors('eventDate')}" th:errors="*{eventDate}">Date error</p>
                     </div>
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" data-form-field="venue">
                     <label for="venue">Venue or location</label>
                     <div class="field-control" th:classappend="${#fields.hasErrors('venue')} ? ' is-invalid'">
                         <input id="venue" type="text" th:field="*{venue}" placeholder="Venue, town or location">
@@ -125,7 +176,7 @@
                     <p class="field-error" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}">Venue error</p>
                 </div>
 
-                <div class="field-group">
+                <div class="field-group" data-form-field="message">
                     <label for="message">Tell Clare a little more</label>
                     <div class="field-control field-control-textarea" th:classappend="${#fields.hasErrors('message')} ? ' is-invalid'">
                         <textarea id="message" th:field="*{message}" rows="7" placeholder="Share the kind of ceremony you are planning, the atmosphere you want, and anything Clare should know."></textarea>
@@ -133,36 +184,11 @@
                     <p class="field-error" th:if="${#fields.hasErrors('message')}" th:errors="*{message}">Message error</p>
                 </div>
 
-                <div class="field-group">
-                    <div class="field-heading">
-                        <label for="attachments">Add files if they help tell the story</label>
-                        <span class="field-optional">Optional</span>
-                    </div>
-                    <label class="file-dropzone" for="attachments" data-file-dropzone>
-                        <input class="file-input"
-                               id="attachments"
-                               type="file"
-                               name="attachments"
-                               accept=".jpg,.jpeg,.png,.webp,.pdf"
-                               multiple
-                               data-file-input
-                               data-file-list-target="attachment-files">
-                        <span class="file-dropzone-copy">
-                            <span class="file-dropzone-title">Share inspiration images, readings or an order of service</span>
-                            <span class="file-dropzone-note">Up to 3 files, 5 MB each. Images and PDFs only.</span>
-                        </span>
-                        <span class="file-dropzone-action">Choose files</span>
-                    </label>
-                    <p class="field-hint">Useful if you already have visual references, a draft order of service, or details you would like Clare to see.</p>
-                    <ul class="file-list" id="attachment-files" data-file-list hidden></ul>
-                    <p class="field-error" th:if="${attachmentError != null}" th:text="${attachmentError}">Attachment error</p>
-                </div>
-
-                <div class="checkbox-row" th:classappend="${#fields.hasErrors('privacyAccepted')} ? ' is-invalid'">
+                <div class="checkbox-row" data-form-field="privacyAccepted" th:classappend="${#fields.hasErrors('privacyAccepted')} ? ' is-invalid'">
                     <input class="checkbox-input" id="privacyAccepted" type="checkbox" th:field="*{privacyAccepted}">
                     <label class="checkbox-label" for="privacyAccepted">
                         <span class="checkbox-box" aria-hidden="true"></span>
-                        <span>I am happy for my details to be used so Clare can respond to this enquiry in line with the privacy notice.</span>
+                        <span>I am happy for my details to be used so Clare can respond to this enquiry in line with the <a class="text-link" th:href="@{/privacy}">privacy notice</a>.</span>
                     </label>
                 </div>
                 <p class="field-error" th:if="${#fields.hasErrors('privacyAccepted')}" th:errors="*{privacyAccepted}">Privacy error</p>
@@ -173,22 +199,10 @@
     </section>
 
     <section class="section section-soft section-atmosphere-sage section-reveal-zone">
-        <div class="shell detail-grid">
-            <article class="detail-card">
-                <p class="eyebrow">Personal reply</p>
-                <h3>You are contacting Clare directly.</h3>
-                <p>The enquiry route is designed to feel personal from the start rather than like a generic booking form.</p>
-            </article>
-            <article class="detail-card">
-                <p class="eyebrow">Clear next steps</p>
-                <h3>No guesswork about what happens after you press send.</h3>
-                <p>The conversation continues clearly, with room to talk through ceremony style, timing and what support you need.</p>
-            </article>
-            <article class="detail-card">
-                <p class="eyebrow">Privacy respected</p>
-                <h3>Your details are used only to respond to your enquiry.</h3>
-                <p>The site is set up to support professional, privacy-conscious communication from the beginning.</p>
-            </article>
+        <div class="shell contact-note-card">
+            <p class="eyebrow">A simple starting point</p>
+            <h2>Not sure what you need yet? That’s completely fine — start with a message.</h2>
+            <p>Clare can help you work out the best next step, whether you already know exactly what you want or you are still finding the right format for the ceremony.</p>
         </div>
     </section>
 </main>

@@ -1,20 +1,20 @@
 package co.uk.clarebrunton.ceremonies.model;
 
-import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class InquiryForm {
 
-	@NotBlank(message = "Please add a first name.")
-	private String firstName;
-
-	@NotBlank(message = "Please add a last name.")
-	private String lastName;
+	@NotBlank(message = "Please add your full name.")
+	private String fullName;
 
 	@NotBlank(message = "Please add an email address.")
 	@Email(message = "Please use a valid email address.")
@@ -26,6 +26,8 @@ public class InquiryForm {
 	@NotBlank(message = "Please choose the type of ceremony.")
 	private String serviceType;
 
+	@NotNull(message = "Please add a preferred date.")
+	@FutureOrPresent(message = "Please choose a date that is today or later.")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate eventDate;
 
@@ -39,20 +41,12 @@ public class InquiryForm {
 	@AssertTrue(message = "Please confirm that you are happy for us to handle your details.")
 	private boolean privacyAccepted;
 
-	public String getFirstName() {
-		return firstName;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getEmail() {

@@ -1,30 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'weddings', ~{::main})}">
-<main>
+<main class="theme-wedding">
     <section class="page-hero page-hero-editorial section-reveal-zone">
         <div class="shell page-hero-grid">
-            <div>
+            <div class="story-copy">
                 <p class="eyebrow">Wedding ceremonies</p>
-                <h1>Modern ceremonies for couples who want something personal, polished and full of feeling.</h1>
+                <h1>Modern wedding ceremonies, designed around your story</h1>
+                <p class="lead">A personal, heartfelt and beautifully written ceremony that feels like you.</p>
+                <div class="hero-actions">
+                    <a class="button" th:href="@{/contact}">Enquire about your wedding</a>
+                    <a class="button button-secondary" href="#wedding-enquiry-placeholder">Start your wedding enquiry</a>
+                </div>
             </div>
-            <p class="lead">Clare creates wedding ceremonies that feel like a true reflection of the couple at the centre of them, with the right balance of warmth, style and calm guidance.</p>
+            <figure class="visual-stage media-stage media-stage-weddings">
+                <img th:src="@{/images/clare/weddings-confetti.jpg}"
+                     alt="Clare smiling as confetti is thrown around her in celebration.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Wedding hero</p>
+                    <p class="visual-caption">Clare's confetti portrait gives the wedding page an immediate sense of joy, personality and confidence.</p>
+                </figcaption>
+            </figure>
         </div>
     </section>
 
     <section class="section section-atmosphere-clay section-divider section-reveal-zone">
         <div class="shell split-layout split-layout-visual">
             <div class="story-copy">
-                <p>Every wedding ceremony should sound like the people it belongs to. Clare works with couples to shape a ceremony that feels relaxed, beautifully paced and genuinely theirs rather than over-scripted or overly formal.</p>
-                <p>From the first conversation through to delivery on the day, the process is designed to feel clear and supportive. There is space for story, vows, readings, family involvement and those small details that make the whole thing feel personal.</p>
-                <p>This is a celebrant-led ceremony service. Any legal marriage requirements should always be confirmed separately where a registrar or other legal process is still required.</p>
+                <p class="eyebrow">Why celebrant-led weddings</p>
+                <h2>Flexible, personal and meaningful from beginning to end.</h2>
+                <p>Celebrant-led weddings give couples more freedom to create a ceremony that feels truly personal, whether that means a different tone, more storytelling, family involvement or symbolic details that matter to them.</p>
+                <p>Clare works with couples to create something stylish, warm and genuinely reflective of their relationship. Where needed, legal marriage registration can be completed separately from the celebrant ceremony itself.</p>
             </div>
-            <figure class="visual-stage media-stage media-stage-weddings">
-                <img th:src="@{/images/clare/weddings-confetti.jpg}"
-                     alt="Clare smiling as pink petals are thrown towards the camera, creating a joyful celebratory moment.">
+            <figure class="visual-stage media-stage media-stage-detail">
+                <img th:src="@{/images/weddings/home-hero.jpg}"
+                     alt="A wedding couple standing together in warm evening light.">
                 <figcaption class="media-stage-overlay">
-                    <p class="media-stage-kicker">Clare's wedding image</p>
-                    <p class="visual-caption">The confetti portrait now opens the weddings page with a brighter, more celebratory image of Clare in the role she is stepping into.</p>
+                    <p class="media-stage-kicker">Personal and polished</p>
+                    <p class="visual-caption">The wedding offer should feel modern and elegant, without losing warmth or personality.</p>
                 </figcaption>
             </figure>
         </div>
@@ -33,115 +46,42 @@
     <section class="section section-soft section-atmosphere-sage section-divider section-reveal-zone">
         <div class="shell section-heading">
             <p class="eyebrow">Packages</p>
-            <h2>Three wedding ceremony options, each with room for final wording and pricing sign-off.</h2>
-            <p class="lead">The structure is ready now, and exact pricing can be added as soon as Clare finalises the numbers.</p>
+            <h2>Three wedding ceremony packages with clear structure and easy pricing updates later.</h2>
+            <p class="lead">The package names and features are ready for launch, while pricing can be confirmed as soon as Clare signs off the final figures.</p>
         </div>
 
         <div class="shell package-grid">
             <article class="package-card">
-                <p class="package-tag">Package one</p>
-                <h3>The Ceremony Edit</h3>
-                <p class="package-price">Pricing to be confirmed</p>
+                <p class="package-tag">Essential</p>
+                <h3>Essential Ceremony</h3>
+                <p class="package-price">Price to be confirmed</p>
                 <ul class="package-list">
-                    <li>One consultation</li>
-                    <li>Bespoke ceremony writing</li>
-                    <li>Delivery on the day</li>
+                    <li>Initial consultation</li>
+                    <li>Ceremony writing</li>
+                    <li>Ceremony delivery on the day</li>
                 </ul>
             </article>
             <article class="package-card featured">
-                <p class="package-tag">Package two</p>
-                <h3>The Signature Edit</h3>
-                <p class="package-price">Pricing to be confirmed</p>
+                <p class="package-tag">Signature</p>
+                <h3>Signature Ceremony</h3>
+                <p class="package-price">Price to be confirmed</p>
                 <ul class="package-list">
-                    <li>Everything in package one</li>
-                    <li>Additional contact and planning meetings</li>
+                    <li>Everything in Essential</li>
+                    <li>Multiple meetings or planning contact</li>
+                    <li>Ceremony refinement</li>
                     <li>Rehearsal support</li>
                 </ul>
             </article>
             <article class="package-card">
-                <p class="package-tag">Package three</p>
-                <h3>The Keepsake Edit</h3>
-                <p class="package-price">Pricing to be confirmed</p>
+                <p class="package-tag">Complete</p>
+                <h3>Complete Ceremony Experience</h3>
+                <p class="package-price">Price to be confirmed</p>
                 <ul class="package-list">
-                    <li>Everything in package two</li>
+                    <li>Everything in Signature</li>
                     <li>Printed ceremony script</li>
-                    <li>Printed vows to keep</li>
+                    <li>Vow support</li>
+                    <li>Symbolic ceremony support</li>
                 </ul>
-            </article>
-        </div>
-    </section>
-
-    <section class="section section-atmosphere-portrait section-divider section-reveal-zone">
-        <div class="shell section-heading">
-            <p class="eyebrow">Real wedding details</p>
-            <h2>Use the supplied imagery to show the tone, intimacy and finish Clare is aiming to deliver.</h2>
-            <p class="lead">These moments land better than generic stock because they already carry the softness, woodland setting and personal detail the site is leaning into.</p>
-        </div>
-
-        <div class="shell wedding-gallery">
-            <figure class="gallery-card gallery-card-tall">
-                <img th:src="@{/images/weddings/couple-walk.jpg}"
-                     alt="A smiling bride and groom walking together after their wedding celebration.">
-            </figure>
-            <figure class="gallery-card">
-                <img th:src="@{/images/weddings/detail-rings.jpg}"
-                     alt="Close-up detail of wedding rings and hands resting together.">
-            </figure>
-            <figure class="gallery-card">
-                <img th:src="@{/images/weddings/reception-arrival.jpg}"
-                     alt="Bride and groom arriving into their reception space together.">
-            </figure>
-        </div>
-    </section>
-
-    <section class="section section-atmosphere-mist section-divider section-reveal-zone">
-        <div class="shell process-layout">
-            <div class="section-heading compact">
-                <p class="eyebrow">What to expect</p>
-                <h2>A wedding process that feels exciting, not overwhelming.</h2>
-            </div>
-            <ol class="process-list">
-                <li>
-                    <span>01</span>
-                    <div>
-                        <h3>Availability and first chat</h3>
-                        <p>Start with a conversation about your date, venue, ideas and the kind of atmosphere you want the ceremony to have.</p>
-                    </div>
-                </li>
-                <li>
-                    <span>02</span>
-                    <div>
-                        <h3>Story and structure</h3>
-                        <p>Clare shapes the script around your story, your people and the moments that matter most to you.</p>
-                    </div>
-                </li>
-                <li>
-                    <span>03</span>
-                    <div>
-                        <h3>Ready for the day</h3>
-                        <p>Once everything feels right, the ceremony is delivered with confidence, warmth and a calm presence on the day itself.</p>
-                    </div>
-                </li>
-            </ol>
-        </div>
-    </section>
-
-    <section class="section section-soft section-atmosphere-clay section-divider section-reveal-zone">
-        <div class="shell detail-grid">
-            <article class="detail-card">
-                <p class="eyebrow">Included</p>
-                <h3>Consultation and story gathering</h3>
-                <p>The process begins with a proper conversation about the relationship, the atmosphere you want and the moments that matter most.</p>
-            </article>
-            <article class="detail-card">
-                <p class="eyebrow">Included</p>
-                <h3>Bespoke script development</h3>
-                <p>Clare shapes the ceremony around your voice, your people and the way you want the day to feel in the room.</p>
-            </article>
-            <article class="detail-card">
-                <p class="eyebrow">Included</p>
-                <h3>Personal delivery on the day</h3>
-                <p>The final ceremony is delivered with a calm presence and a warm tone that feels elegant rather than overdone.</p>
             </article>
         </div>
     </section>
@@ -150,52 +90,94 @@
         <div class="shell split-layout split-layout-visual">
             <figure class="visual-stage media-stage media-stage-detail">
                 <img th:src="@{/images/clare/wedding-symbolism-ribbons.jpg}"
-                     alt="Clare holding colourful ribbons that can represent symbolic ceremony elements in a wedding.">
+                     alt="Clare holding colourful ribbons to represent symbolic wedding rituals.">
                 <figcaption class="media-stage-overlay">
-                    <p class="media-stage-kicker">Symbolism and ritual</p>
-                    <p class="visual-caption">This image gives the symbolism section a real Clare-led visual for rituals, ribbon moments and other meaningful ceremony details.</p>
+                    <p class="media-stage-kicker">Symbolism section</p>
+                    <p class="visual-caption">A ribbon-led visual keeps the page elegant while introducing rituals and personal ceremony details.</p>
                 </figcaption>
             </figure>
             <div class="story-copy">
-                <p class="eyebrow">Symbolic details</p>
-                <h2>Ribbons, rituals and other meaningful elements can be woven in beautifully.</h2>
-                <p>If a couple wants symbolism built into the ceremony, Clare can shape it in a way that feels personal rather than performative. That might include ribbon rituals, family participation, keepsake moments or other gestures that hold meaning for the people involved.</p>
-                <p>The aim is always to make those elements feel naturally part of the ceremony flow, so they add depth, warmth and memory without interrupting the emotional pace of the day.</p>
+                <p class="eyebrow">Symbolism and ritual</p>
+                <h2>Handfasting, unity rituals and personal readings can all become part of the ceremony naturally.</h2>
+                <p>Clare can incorporate handfasting, unity rituals, sand ceremonies, personal readings and other symbolic moments in a way that feels thoughtful rather than staged.</p>
+                <p>The aim is always to create depth and meaning without interrupting the emotional flow of the ceremony itself.</p>
             </div>
         </div>
     </section>
 
-    <section class="section section-soft section-atmosphere-sage section-divider section-reveal-zone">
-        <div class="shell faq-grid">
-            <div class="section-heading compact">
-                <p class="eyebrow">Helpful notes</p>
-                <h2>Questions couples often need answered early.</h2>
+    <section class="section section-soft section-atmosphere-mist section-divider section-reveal-zone">
+        <div class="shell section-heading">
+            <p class="eyebrow">How it works</p>
+            <h2>A clear wedding process that moves from first enquiry to final ceremony with calm structure.</h2>
+        </div>
+        <div class="shell service-steps-grid">
+            <article class="detail-card">
+                <p class="eyebrow">01</p>
+                <h3>Enquiry</h3>
+                <p>Start with the key details of your date, venue and ceremony style.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">02</p>
+                <h3>Consultation</h3>
+                <p>Clare gets to know your story, your personalities and the atmosphere you want to create.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">03</p>
+                <h3>Questionnaire</h3>
+                <p>A more detailed questionnaire helps gather the stories, details and choices that shape the final script.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">04</p>
+                <h3>Script writing</h3>
+                <p>The ceremony is drafted, refined and prepared with room for personal details and ceremony flow.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">05</p>
+                <h3>Final ceremony</h3>
+                <p>Clare delivers the ceremony with warmth, confidence and a calm premium finish on the day itself.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section section-atmosphere-clay section-divider section-reveal-zone" id="wedding-enquiry-placeholder">
+        <div class="shell split-layout">
+            <div class="story-copy">
+                <p class="eyebrow">Wedding booking form</p>
+                <h2>The detailed booking journey is planned and ready to be connected as the next implementation step.</h2>
+                <p>The public-facing site starts with a clean enquiry route, then expands into a dedicated wedding booking form, questionnaire and contract flow once the final client content and documents are signed off.</p>
+                <a class="button" th:href="@{/contact}">Start your wedding enquiry</a>
             </div>
-            <div class="faq-list">
-                <article>
-                    <h3>Can the ceremony be fully bespoke?</h3>
-                    <p>Yes. The wording, tone and structure are designed around the couple rather than taken from a standard script.</p>
+            <div class="resource-grid">
+                <article class="resource-card">
+                    <p class="resource-label">Document placeholder</p>
+                    <h3>Wedding booking form</h3>
+                    <p>PDF not currently in the repo. Add final downloadable or web-form version here.</p>
+                    <a class="text-link" th:href="@{/documents/wedding-booking-form-placeholder.txt}">Open placeholder resource</a>
                 </article>
-                <article>
-                    <h3>Can family and friends be involved?</h3>
-                    <p>Absolutely. Readings, contributions and meaningful personal touches can all be built into the ceremony.</p>
+                <article class="resource-card">
+                    <p class="resource-label">Document placeholder</p>
+                    <h3>Wedding questionnaire</h3>
+                    <p>Structure is planned for phase two once the supplied questionnaire is brought into the project.</p>
+                    <a class="text-link" th:href="@{/documents/wedding-questionnaire-placeholder.txt}">Open placeholder resource</a>
                 </article>
-                <article>
-                    <h3>Is the ceremony legally binding?</h3>
-                    <p>Any legal marriage requirements should be confirmed separately. Clare's website does not make claims about legal marriage authority unless that position is formally confirmed.</p>
+                <article class="resource-card">
+                    <p class="resource-label">Document placeholder</p>
+                    <h3>Contract of service</h3>
+                    <p>Add final approved PDF or structured service document here after legal review and client sign-off.</p>
+                    <a class="text-link" th:href="@{/documents/contract-of-service-placeholder.txt}">Open placeholder resource</a>
                 </article>
             </div>
         </div>
     </section>
 
-    <section class="section section-atmosphere-clay section-reveal-zone">
+    <section class="section section-atmosphere-sage section-reveal-zone">
         <div class="shell cta-panel">
             <div>
-                <p class="eyebrow">Planning a wedding?</p>
-                <h2>Tell Clare about your date, your venue and the kind of ceremony you have in mind.</h2>
-                <p>Even if you are still working out the exact format, a first conversation will help clarify what feels right.</p>
+                <p class="eyebrow">Planning your wedding?</p>
+                <h2>Tell Clare about your date, your venue and the kind of ceremony you want to create.</h2>
+                <p>If you already know the feeling you want but not yet the final format, Clare can help shape the rest with you.</p>
             </div>
-            <a class="button" th:href="@{/contact}">Enquire about weddings</a>
+            <a class="button" th:href="@{/contact}">Contact Clare</a>
         </div>
     </section>
 </main>

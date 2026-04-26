@@ -83,8 +83,7 @@ Then open `http://localhost:8080`.
 
 The launch contact form collects:
 
-- first name
-- last name
+- full name
 - email
 - phone
 - ceremony type

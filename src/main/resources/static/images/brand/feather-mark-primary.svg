@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+  <title id="title">Clare Life Ceremonies feather mark</title>
+  <desc id="desc">A soft circular emblem with a subtle peacock feather and monogram for Clare Life Ceremonies By Design.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7f1e8"/>
+      <stop offset="100%" stop-color="#ebe0d1"/>
+    </linearGradient>
+    <linearGradient id="feather" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d7f67"/>
+      <stop offset="55%" stop-color="#9a765d"/>
+      <stop offset="100%" stop-color="#c6a76a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="160" cy="160" r="150" fill="url(#bg)"/>
+  <circle cx="160" cy="160" r="149" fill="none" stroke="#d8c4b1" stroke-width="2"/>
+  <path d="M188 54c-22 36-29 66-26 108 2 34-6 64-28 100" fill="none" stroke="url(#feather)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M188 54c36 30 50 61 46 100-3 31-19 55-49 73" fill="none" stroke="#7a8c75" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  <path d="M184 72c26 16 38 35 39 59 0 27-16 46-44 58" fill="none" stroke="#c5a15f" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+  <ellipse cx="198" cy="127" rx="23" ry="32" fill="#6f846e" opacity=".18"/>
+  <ellipse cx="198" cy="127" rx="15" ry="21" fill="#cfb37a" opacity=".6"/>
+  <ellipse cx="198" cy="127" rx="8" ry="11" fill="#6d7f67"/>
+  <text x="111" y="208" fill="#26402f" font-family="'Cormorant Garamond', serif" font-size="74" font-weight="600" letter-spacing="2">C</text>
+</svg>

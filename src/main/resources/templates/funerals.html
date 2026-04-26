@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'funerals', ~{::main})}">
-<main>
+<main class="theme-funeral">
     <section class="page-hero page-hero-editorial section-reveal-zone">
         <div class="shell page-hero-grid">
-            <div>
-                <p class="eyebrow">Funerals and memorials</p>
-                <h1>Compassionate ceremonies written with warmth, clarity and real care for the people in the room.</h1>
+            <div class="story-copy">
+                <p class="eyebrow">Funerals</p>
+                <h1>Thoughtful funeral ceremonies, written with care</h1>
+                <p class="lead">A respectful and personal way to honour a life, share memories and support those saying goodbye.</p>
+                <div class="hero-actions">
+                    <a class="button" th:href="@{/contact}">Contact Clare</a>
+                </div>
             </div>
-            <p class="lead">Clare's approach to funerals and memorials is steady, thoughtful and personal, helping families create something that feels respectful, honest and beautifully held.</p>
+            <figure class="visual-stage media-stage media-stage-detail">
+                <img th:src="@{/images/clare/funeral-portrait-blazer.jpg}"
+                     alt="Clare in darker clothing against a calm natural backdrop.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Calm and respectful</p>
+                    <p class="visual-caption">The funeral page uses darker toned imagery to create a more reflective and reassuring first impression.</p>
+                </figcaption>
+            </figure>
         </div>
     </section>
 
     <section class="section section-atmosphere-clay section-divider section-reveal-zone">
         <div class="shell split-layout split-layout-visual">
             <div class="story-copy">
-                <p>Funeral and memorial ceremonies often need both structure and sensitivity. Clare works closely with families and, where needed, funeral directors to shape a service that reflects the person being remembered with warmth, dignity and care.</p>
-                <p>The focus is on listening well, gathering the right details, and creating a ceremony that feels personal without becoming overwhelming. The tone can be traditional, modern, reflective or gently celebratory depending on the family and the life being honoured.</p>
-                <p>Services can also be shaped for memorials, interments and unique locations where a more bespoke ceremony is needed.</p>
+                <p class="eyebrow">A personal farewell</p>
+                <h2>Celebrations of life, memorials and funeral ceremonies that reflect the person being remembered.</h2>
+                <p>Clare can create a service that honours a life with warmth, dignity and a clear sense of who the person was, whether the tone needs to feel traditional, modern, reflective or gently celebratory.</p>
+                <p>The process is built to support families calmly at a difficult time, while also giving funeral directors a professional, thoughtful celebrant partner they can feel confident recommending.</p>
             </div>
             <figure class="visual-stage media-stage media-stage-detail">
-                <img th:src="@{/images/clare/funeral-portrait-blazer.jpg}"
-                     alt="Clare in a dark blazer and black outfit, photographed calmly against ivy for the funeral section.">
+                <img th:src="@{/images/clare/funeral-portrait-black.jpg}"
+                     alt="A serene natural setting symbolising remembrance and calm.">
                 <figcaption class="media-stage-overlay">
-                    <p class="media-stage-kicker">A calm approach</p>
-                    <p class="visual-caption">A darker, steadier portrait now gives the funeral page a more appropriate Clare-led tone from the first section.</p>
+                    <p class="media-stage-kicker">Gentle and supportive</p>
+                    <p class="visual-caption">Funeral support for families, funeral directors and memorial gatherings with dignity and care.</p>
                 </figcaption>
             </figure>
         </div>
@@ -32,114 +44,104 @@
 
     <section class="section section-soft section-atmosphere-sage section-divider section-reveal-zone">
         <div class="shell section-heading">
-            <p class="eyebrow">Packages</p>
-            <h2>A simple funeral offer for directors, with space for a more bespoke family-led option.</h2>
-            <p class="lead">Exact pricing can be added once Clare signs off her final launch rates.</p>
+            <p class="eyebrow">Funeral options</p>
+            <h2>Two clear service routes, both ready for final pricing.</h2>
+            <p class="lead">Each option can be updated easily once Clare signs off the final package wording and price points.</p>
         </div>
 
         <div class="shell package-grid package-grid-two">
             <article class="package-card">
                 <p class="package-tag">Option one</p>
-                <h3>Funeral director package</h3>
-                <p class="package-price">Set rate to be added</p>
+                <h3>Funeral Director Ceremony</h3>
+                <p class="package-price">Price to be confirmed</p>
                 <ul class="package-list">
-                    <li>Structured ceremony support</li>
-                    <li>Written tribute and service flow</li>
+                    <li>Structured liaison around the service</li>
+                    <li>Written ceremony and tribute preparation</li>
                     <li>Delivery on the day</li>
+                    <li>Additional travel may apply for ceremonies outside the local area</li>
                 </ul>
             </article>
             <article class="package-card featured">
                 <p class="package-tag">Option two</p>
-                <h3>Bespoke family package</h3>
-                <p class="package-price">Pricing to be confirmed</p>
+                <h3>Bespoke Celebration of Life</h3>
+                <p class="package-price">Price to be confirmed</p>
                 <ul class="package-list">
-                    <li>Ideal for unique venues, interments or memorials</li>
-                    <li>Additional planning and family liaison</li>
-                    <li>Extra personal elements shaped into the service</li>
+                    <li>More personalised planning and family collaboration</li>
+                    <li>Flexible structure for memorials or unique venues</li>
+                    <li>Carefully shaped personal tribute</li>
+                    <li>Additional travel may apply for ceremonies outside the local area</li>
                 </ul>
             </article>
         </div>
     </section>
 
     <section class="section section-atmosphere-mist section-divider section-reveal-zone">
-        <div class="shell process-layout">
-            <div class="section-heading compact">
-                <p class="eyebrow">How Clare helps</p>
-                <h2>Families should feel guided gently through what happens next.</h2>
-            </div>
-            <ol class="process-list process-list-light">
-                <li>
-                    <span>01</span>
-                    <div>
-                        <h3>Initial conversation</h3>
-                        <p>Clare listens carefully to the family, understands the tone they need and works through the shape of the service.</p>
-                    </div>
-                </li>
-                <li>
-                    <span>02</span>
-                    <div>
-                        <h3>Tribute and structure</h3>
-                        <p>The ceremony is written with dignity, warmth and enough clarity that the family never feels unsure about the next step.</p>
-                    </div>
-                </li>
-                <li>
-                    <span>03</span>
-                    <div>
-                        <h3>Delivered with care</h3>
-                        <p>On the day, the focus is on gentle pacing, calm presence and a service that feels properly held.</p>
-                    </div>
-                </li>
-            </ol>
+        <div class="shell section-heading">
+            <p class="eyebrow">Supportive process</p>
+            <h2>A calm step-by-step structure for families who need clarity and compassion.</h2>
+        </div>
+        <div class="shell service-steps-grid">
+            <article class="detail-card">
+                <p class="eyebrow">01</p>
+                <h3>Initial conversation</h3>
+                <p>Clare speaks with the family or funeral director to understand the person, the service and the tone required.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">02</p>
+                <h3>Gathering memories</h3>
+                <p>Stories, important details and meaningful moments are gently gathered to shape the tribute.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">03</p>
+                <h3>Writing the ceremony</h3>
+                <p>The ceremony is written with dignity, sensitivity and a clear sense of the life being honoured.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">04</p>
+                <h3>Delivering the service</h3>
+                <p>On the day, Clare provides a calm, respectful presence and clear pacing throughout the ceremony.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">05</p>
+                <h3>Follow-up support</h3>
+                <p>Where appropriate, Clare can help ensure any final ceremony materials are shared clearly afterwards.</p>
+            </article>
         </div>
     </section>
 
-    <section class="section section-soft section-atmosphere-clay section-divider section-reveal-zone">
+    <section class="section section-soft section-atmosphere-portrait section-divider section-reveal-zone">
+        <div class="shell section-heading">
+            <p class="eyebrow">Tone and care</p>
+            <h2>The funeral offer is built on dignity, compassion and personalisation.</h2>
+        </div>
         <div class="shell detail-grid">
             <article class="detail-card">
-                <p class="eyebrow">Families</p>
-                <h3>Clear communication at a difficult time.</h3>
-                <p>Everything should feel manageable, respectful and easy to understand even when emotions are high.</p>
+                <h3>Dignity</h3>
+                <p>Services are handled with thought, professionalism and the right sense of occasion.</p>
             </article>
             <article class="detail-card">
-                <p class="eyebrow">Writing</p>
-                <h3>Tributes that feel personal, not borrowed.</h3>
-                <p>The ceremony should reflect the life being remembered with honesty, care and the right emotional tone.</p>
+                <h3>Compassion</h3>
+                <p>Families are supported gently and clearly at a time when everything can feel harder to process.</p>
             </article>
             <article class="detail-card">
-                <p class="eyebrow">Flexibility</p>
-                <h3>Support for memorials, interments and unique locations.</h3>
-                <p>Where a more bespoke service is needed, Clare can shape the ceremony around the setting and the family involved.</p>
+                <h3>Sensitivity</h3>
+                <p>The tone, pace and wording are shaped to suit the life, family and room involved.</p>
+            </article>
+            <article class="detail-card">
+                <h3>Personalisation</h3>
+                <p>Every ceremony is written to reflect the individual honestly, not delivered from a generic format.</p>
             </article>
         </div>
     </section>
 
-    <section class="section section-atmosphere-sage section-divider section-reveal-zone">
-        <div class="shell split-layout split-layout-visual">
-            <figure class="visual-stage media-stage media-stage-detail">
-                <img th:src="@{/images/clare/funeral-portrait-black.jpg}"
-                     alt="Clare wearing a simple black outfit in a calm outdoor portrait for funeral and memorial use.">
-                <figcaption class="media-stage-overlay">
-                    <p class="media-stage-kicker">Supportive presence</p>
-                    <p class="visual-caption">The secondary funeral portrait reinforces the calmer side of Clare's work for reflective services and memorial support.</p>
-                </figcaption>
-            </figure>
-            <div class="story-copy">
-                <p class="eyebrow">Additional note</p>
-                <h2>Travel and ceremony details can be discussed clearly in advance.</h2>
-                <p>If additional travel is required, that can be agreed in advance so everything feels straightforward before the service goes ahead.</p>
-                <p>Clare can also tailor the ceremony around the pace, tone and level of personal involvement that feels right for the family.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section section-atmosphere-clay section-reveal-zone">
+    <section class="section section-atmosphere-sage section-reveal-zone">
         <div class="shell cta-panel">
             <div>
-                <p class="eyebrow">Need funeral support?</p>
-                <h2>Reach out and Clare can talk through the tone, timing and kind of service you need.</h2>
-                <p>The first step is simply a personal conversation about what would feel most helpful.</p>
+                <p class="eyebrow">Funeral enquiry</p>
+                <h2>If you need support, the first step is a quiet personal conversation.</h2>
+                <p>Clare can talk through the type of service you need, the timing involved and how the ceremony can be shaped with care.</p>
             </div>
-            <a class="button" th:href="@{/contact}">Enquire about funerals</a>
+            <a class="button" th:href="@{/contact}">Contact Clare</a>
         </div>
     </section>
 </main>

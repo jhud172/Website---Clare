@@ -1,61 +1,157 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'ceremonies', ~{::main})}">
+      th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'services', ~{::main})}">
 <main>
     <section class="page-hero page-hero-editorial section-reveal-zone">
         <div class="shell page-hero-grid">
-            <div>
-                <p class="eyebrow">Ceremonies</p>
-                <h1>Beautifully prepared ceremonies for the chapters that deserve more than a script.</h1>
+            <div class="story-copy">
+                <p class="eyebrow">Services</p>
+                <h1>Ceremonies for life's most meaningful moments</h1>
+                <p class="lead">From joyful weddings to heartfelt farewells, each ceremony is designed around your story.</p>
             </div>
-            <p class="lead">Weddings and funerals sit at the heart of the launch, with space for naming ceremonies, vow renewals and other milestone moments as the business grows.</p>
+            <figure class="visual-stage media-stage media-stage-detail">
+                <img th:src="@{/images/clare/wedding-symbolism-ribbons.jpg}"
+                     alt="Elegant ceremony ribbons symbolising connection and meaning in celebrations.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Every ceremony tells a story</p>
+                    <p class="visual-caption">The services page shows the different ceremony types Clare offers, with links to explore each one.</p>
+                </figcaption>
+            </figure>
         </div>
     </section>
 
     <section class="section section-atmosphere-clay section-divider section-reveal-zone">
-        <div class="shell path-grid">
-            <a class="path-panel path-panel-wedding" th:href="@{/weddings}">
-                <p class="path-index">01</p>
+        <div class="shell section-heading">
+            <p class="eyebrow">Service overview</p>
+            <h2>A simple overview so visitors can quickly find the right ceremony path.</h2>
+        </div>
+        <div class="shell detail-grid values-grid">
+            <article class="detail-card">
+                <p class="eyebrow">Weddings</p>
                 <h3>Wedding ceremonies</h3>
-                <p>Bespoke ceremonies for modern couples who want something stylish, heartfelt and completely personal.</p>
-                <span class="text-link">View weddings</span>
-            </a>
-            <a class="path-panel path-panel-funeral" th:href="@{/funerals}">
-                <p class="path-index">02</p>
-                <h3>Funerals and memorials</h3>
-                <p>Supportive ceremonies written with warmth and care for families, funeral directors and meaningful gatherings.</p>
-                <span class="text-link">View funerals</span>
-            </a>
+                <p>Modern, bespoke ceremonies designed for couples who want warmth, personality and style.</p>
+                <a class="text-link" th:href="@{/weddings}">View weddings</a>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Funerals</p>
+                <h3>Funeral ceremonies</h3>
+                <p>Respectful, personal services created with compassion, clarity and care.</p>
+                <a class="text-link" th:href="@{/funerals}">View funerals</a>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Naming</p>
+                <h3>Naming ceremonies</h3>
+                <p>Thoughtful ways to welcome children into family life with meaning and warmth.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Renewals</p>
+                <h3>Vow renewals</h3>
+                <p>Elegant ceremonies for couples celebrating the story they have already built together.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">Life events</p>
+                <h3>Special life ceremonies</h3>
+                <p>Flexible ceremony design for milestone moments that deserve something personal and memorable.</p>
+            </article>
         </div>
     </section>
 
     <section class="section section-soft section-atmosphere-sage section-divider section-reveal-zone">
+        <div class="shell split-layout split-layout-visual">
+            <figure class="visual-stage media-stage media-stage-detail">
+                <img th:src="@{/images/weddings/couple-walk.jpg}"
+                     alt="A couple walking together after their ceremony.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Wedding ceremonies</p>
+                    <p class="visual-caption">Personal, relaxed and elegant ceremonies for couples who want the day to sound like them.</p>
+                </figcaption>
+            </figure>
+            <div class="story-copy">
+                <p class="eyebrow">Weddings</p>
+                <h2>Wedding ceremonies designed around the couple, not a standard script.</h2>
+                <p>Clare works with couples to create a ceremony that feels warm, polished and deeply personal, with room for vows, readings, symbolism and the atmosphere they want to create.</p>
+                <a class="button button-secondary" th:href="@{/weddings}">Visit the Weddings page</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-atmosphere-portrait section-divider section-reveal-zone">
+        <div class="shell split-layout split-layout-visual">
+            <div class="story-copy">
+                <p class="eyebrow">Funerals</p>
+                <h2>Funeral and memorial ceremonies written with dignity, sensitivity and care.</h2>
+                <p>For families and funeral directors, Clare offers a calm and respectful service that reflects a life honestly while helping everyone feel gently guided through the ceremony process.</p>
+                <a class="button button-secondary" th:href="@{/funerals}">Visit the Funerals page</a>
+            </div>
+            <figure class="visual-stage media-stage media-stage-detail">
+                <img th:src="@{/images/clare/funeral-portrait-black.jpg}"
+                     alt="Clare in a dark portrait suitable for funeral page use.">
+                <figcaption class="media-stage-overlay">
+                    <p class="media-stage-kicker">Funeral support</p>
+                    <p class="visual-caption">The funeral offer is calm, respectful and clearly positioned for families and professional partners.</p>
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section section-soft section-atmosphere-mist section-divider section-reveal-zone">
+        <div class="shell section-heading">
+            <p class="eyebrow">Other ceremonies</p>
+            <h2>Open-ended enough to grow with the business, but still clear for launch.</h2>
+        </div>
         <div class="shell detail-grid">
             <article class="detail-card">
-                <p class="eyebrow">03</p>
                 <h3>Naming ceremonies</h3>
-                <p>A warm way to welcome children into family life with words, rituals and roles that feel personal to those involved.</p>
+                <p>Welcoming a child into family life with words, symbolism and involvement that feel right for the people there.</p>
             </article>
             <article class="detail-card">
-                <p class="eyebrow">04</p>
                 <h3>Vow renewals</h3>
-                <p>A chance to celebrate an ongoing story with fresh words, new promises and a ceremony that fits the life you have built together.</p>
+                <p>Fresh promises and a meaningful way to celebrate a relationship at a new stage of life.</p>
             </article>
             <article class="detail-card">
-                <p class="eyebrow">05</p>
-                <h3>Other milestone ceremonies</h3>
-                <p>If there is a moment worth marking with thought and meaning, Clare can shape a ceremony around the tone and story you want to hold.</p>
+                <h3>Special life events</h3>
+                <p>Milestone moments that deserve structure, story and a more personal feel than a generic event format.</p>
             </article>
         </div>
     </section>
 
-    <section class="section section-atmosphere-mist section-reveal-zone">
+    <section class="section section-atmosphere-clay section-divider section-reveal-zone">
+        <div class="shell section-heading">
+            <p class="eyebrow">How it works</p>
+            <h2>A clear ceremony process that keeps the experience easy to understand.</h2>
+        </div>
+        <div class="shell service-steps-grid">
+            <article class="detail-card">
+                <p class="eyebrow">01</p>
+                <h3>Enquire</h3>
+                <p>Start with a message about the kind of ceremony you are planning and the support you need.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">02</p>
+                <h3>Consultation</h3>
+                <p>Clare learns more about the people involved, the tone you want and the moments that matter most.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">03</p>
+                <h3>Ceremony design</h3>
+                <p>Story, wording, pacing and symbolic elements are shaped into a ceremony that feels true to you.</p>
+            </article>
+            <article class="detail-card">
+                <p class="eyebrow">04</p>
+                <h3>Final ceremony</h3>
+                <p>The day is delivered with clarity, warmth and a calm sense of occasion.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section section-atmosphere-sage section-reveal-zone">
         <div class="shell cta-panel">
             <div>
-                <p class="eyebrow">Need guidance on the right fit?</p>
-                <h2>If you know the moment but not yet the exact format, Clare can help shape it with you.</h2>
+                <p class="eyebrow">Start your ceremony enquiry</p>
+                <h2>If you know the kind of ceremony you need, Clare can help shape the rest.</h2>
+                <p>Enquire now and Clare can guide you towards the right format, support and next step.</p>
             </div>
-            <a class="button" th:href="@{/contact}">Ask about your ceremony</a>
+            <a class="button" th:href="@{/contact}">Start your ceremony enquiry</a>
         </div>
     </section>
 </main>

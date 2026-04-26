@@ -1,7 +1,8 @@
 package co.uk.clarebrunton.ceremonies.service;
 
-import co.uk.clarebrunton.ceremonies.config.SiteProperties;
-import co.uk.clarebrunton.ceremonies.model.InquiryForm;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -14,10 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import co.uk.clarebrunton.ceremonies.config.SiteProperties;
+import co.uk.clarebrunton.ceremonies.model.InquiryForm;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 @Service
 public class InquiryNotificationService {
@@ -42,9 +43,8 @@ public class InquiryNotificationService {
 		List<MultipartFile> safeAttachments = attachments == null ? List.of() : attachments;
 
 		if (mailSender == null || !StringUtils.hasText(recipient)) {
-			logger.info("Inquiry received without outbound email configuration: {} {} / {} / {} / {} attachment(s)",
-					inquiryForm.getFirstName(),
-					inquiryForm.getLastName(),
+			logger.info("Inquiry received without outbound email configuration: {} / {} / {} / {} attachment(s)",
+					inquiryForm.getFullName(),
 					inquiryForm.getServiceType(),
 					inquiryForm.getEmail(),
 					safeAttachments.size());
@@ -80,7 +80,7 @@ public class InquiryNotificationService {
 		helper.setText("""
 				A new website enquiry has been submitted.
 
-				Name: %s %s
+				Name: %s
 				Email: %s
 				Phone: %s
 				Service: %s
@@ -91,8 +91,7 @@ public class InquiryNotificationService {
 				Message:
 				%s
 				""".formatted(
-				inquiryForm.getFirstName(),
-				inquiryForm.getLastName(),
+				inquiryForm.getFullName(),
 				inquiryForm.getEmail(),
 				inquiryForm.getPhone(),
 				inquiryForm.getServiceType(),
@@ -129,13 +128,23 @@ public class InquiryNotificationService {
 				Clare will review your details and reply personally as soon as she can. If your plans are time-sensitive, you are also welcome to follow up on %s.
 
 				With thanks,
-				Clare Brunton Life Ceremonies
+				Clare Life Ceremonies
 				""".formatted(
-				inquiryForm.getFirstName(),
+				resolveGreetingName(inquiryForm),
 				inquiryForm.getServiceType().toLowerCase(),
 				siteProperties.getContactEmail()
 		));
 		return message;
+	}
+
+	private String resolveGreetingName(InquiryForm inquiryForm) {
+		String fullName = inquiryForm.getFullName();
+		if (!StringUtils.hasText(fullName)) {
+			return "there";
+		}
+
+		String[] parts = fullName.trim().split("\\s+");
+		return parts.length > 0 ? parts[0] : fullName.trim();
 	}
 
 }

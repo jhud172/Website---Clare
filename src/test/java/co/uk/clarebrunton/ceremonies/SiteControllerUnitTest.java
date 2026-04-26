@@ -1,19 +1,19 @@
 package co.uk.clarebrunton.ceremonies;
 
-import co.uk.clarebrunton.ceremonies.controller.SiteController;
-import co.uk.clarebrunton.ceremonies.model.InquiryForm;
-import co.uk.clarebrunton.ceremonies.service.BlogService;
-import co.uk.clarebrunton.ceremonies.service.InquiryNotificationService;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
+import co.uk.clarebrunton.ceremonies.controller.SiteController;
+import co.uk.clarebrunton.ceremonies.model.InquiryForm;
+import co.uk.clarebrunton.ceremonies.service.BlogService;
+import co.uk.clarebrunton.ceremonies.service.InquiryNotificationService;
 
 class SiteControllerUnitTest {
 
@@ -26,14 +26,14 @@ class SiteControllerUnitTest {
 
 		assertThat(controller.home(model)).isEqualTo("home");
 		assertThat(controller.about(new ExtendedModelMap())).isEqualTo("about");
-		assertThat(controller.ceremonies(new ExtendedModelMap())).isEqualTo("ceremonies");
+		assertThat(controller.services(new ExtendedModelMap())).isEqualTo("ceremonies");
 		assertThat(controller.weddings(new ExtendedModelMap())).isEqualTo("weddings");
 		assertThat(controller.funerals(new ExtendedModelMap())).isEqualTo("funerals");
 		assertThat(controller.reviews(new ExtendedModelMap())).isEqualTo("reviews");
 		assertThat(controller.contact(new ExtendedModelMap())).isEqualTo("contact");
 		assertThat(controller.privacy(new ExtendedModelMap())).isEqualTo("privacy");
 		assertThat(controller.thankYou(new ExtendedModelMap())).isEqualTo("thank-you");
-		assertThat(controller.servicesRedirect()).isEqualTo("redirect:/ceremonies");
+		assertThat(controller.ceremoniesRedirect()).isEqualTo("redirect:/services");
 	}
 
 	@Test
@@ -49,7 +49,7 @@ class SiteControllerUnitTest {
 	void submitContactReturnsContactViewWhenBindingHasErrors() {
 		InquiryForm inquiryForm = new InquiryForm();
 		BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(inquiryForm, "inquiryForm");
-		bindingResult.rejectValue("firstName", "required", "Please add a first name.");
+		bindingResult.rejectValue("fullName", "required", "Please add your full name.");
 
 		String view = controller.submitContact(
 				inquiryForm,
@@ -65,8 +65,7 @@ class SiteControllerUnitTest {
 	@Test
 	void submitContactRedirectsWhenBindingIsValid() {
 		InquiryForm inquiryForm = new InquiryForm();
-		inquiryForm.setFirstName("James");
-		inquiryForm.setLastName("Hudson");
+		inquiryForm.setFullName("James Hudson");
 		inquiryForm.setEmail("james@example.com");
 		inquiryForm.setPhone("07123456789");
 		inquiryForm.setServiceType("Wedding ceremony");
