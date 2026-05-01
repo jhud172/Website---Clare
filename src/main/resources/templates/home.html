@@ -2,30 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="~{fragments/layout :: page(${pageTitle}, ${pageDescription}, 'home', ~{::main})}">
 <main>
-    <section class="hero hero-canvas section-reveal-zone">
-        <div class="shell hero-grid">
-            <div class="hero-copy hero-copy-tight">
+    <section class="hero hero-fullbleed section-reveal-zone">
+        <figure class="hero-media" aria-hidden="true">
+            <img th:src="@{/images/weddings/home-hero.jpg}"
+                 alt=""
+                 loading="eager"
+                 fetchpriority="high">
+        </figure>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="shell">
+            <div class="hero-copy hero-fullbleed-copy">
                 <p class="eyebrow">Clare Life Ceremonies · By Design</p>
                 <h1>Ceremonies created with warmth, meaning and care</h1>
                 <p class="lead">Clare Life Ceremonies designs personal wedding, funeral and life ceremonies that reflect the people, stories and moments that matter most.</p>
                 <div class="hero-actions">
                     <a class="button" th:href="@{/services}">Explore Ceremonies</a>
-                    <a class="button button-secondary" th:href="@{/contact}">Contact Clare</a>
+                    <a class="button-light" th:href="@{/contact}">Contact Clare</a>
                 </div>
                 <div class="brand-ornament" aria-hidden="true">
                     <img th:src="@{/images/brand/feather-mark-primary.svg}" alt="">
-                    <span>Peacock feather identity</span>
+                    <span>Warm · Personal · By Design</span>
                 </div>
             </div>
-
-            <figure class="visual-stage media-stage media-stage-home">
-                <img th:src="@{/images/weddings/home-hero.jpg}"
-                     alt="A bride and groom standing together in warm natural light after their ceremony.">
-                <figcaption class="media-stage-overlay">
-                    <p class="media-stage-kicker">Warm, modern and personal</p>
-                    <p class="visual-caption">The first impression is elegant and calm, with imagery that feels real, celebratory and premium.</p>
-                </figcaption>
-            </figure>
         </div>
     </section>
 
