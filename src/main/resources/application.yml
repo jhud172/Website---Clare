@@ -5,7 +5,7 @@ spring:
   application:
     name: clare-ceremonies-site
   thymeleaf:
-    cache: false
+    cache: ${THYMELEAF_CACHE:true}
   servlet:
     multipart:
       max-file-size: 5MB

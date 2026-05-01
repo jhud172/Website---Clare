@@ -43,7 +43,7 @@ public class InquiryNotificationService {
 		List<MultipartFile> safeAttachments = attachments == null ? List.of() : attachments;
 
 		if (mailSender == null || !StringUtils.hasText(recipient)) {
-			logger.info("Inquiry received without outbound email configuration: {} / {} / {} / {} attachment(s)",
+			logger.info("Inquiry received (no outbound email configured): name={}, service={}, email={}, attachments={}",
 					inquiryForm.getFullName(),
 					inquiryForm.getServiceType(),
 					inquiryForm.getEmail(),
@@ -53,10 +53,20 @@ public class InquiryNotificationService {
 
 		try {
 			mailSender.send(createAdminMessage(mailSender, recipient, inquiryForm, safeAttachments));
-			mailSender.send(createConfirmationMessage(inquiryForm));
+			logger.info("Admin notification sent to {} for inquiry from {}", recipient, inquiryForm.getEmail());
 		}
 		catch (MailException | MessagingException exception) {
-			logger.error("Inquiry email could not be sent. Check SMTP settings before going live.", exception);
+			logger.error("Admin notification could not be sent for inquiry from {}. Check SMTP settings.",
+					inquiryForm.getEmail(), exception);
+		}
+
+		try {
+			mailSender.send(createConfirmationMessage(inquiryForm));
+			logger.info("Confirmation email sent to {}", inquiryForm.getEmail());
+		}
+		catch (MailException exception) {
+			logger.error("Confirmation email could not be sent to {}. Check SMTP settings.",
+					inquiryForm.getEmail(), exception);
 		}
 	}
 
@@ -76,21 +86,27 @@ public class InquiryNotificationService {
 		}
 		helper.setTo(recipient);
 		helper.setReplyTo(inquiryForm.getEmail());
-		helper.setSubject("New ceremony enquiry: " + inquiryForm.getServiceType());
+		helper.setSubject("New enquiry: " + inquiryForm.getServiceType() + " — " + inquiryForm.getFullName());
 		helper.setText("""
-				A new website enquiry has been submitted.
+				New enquiry received via %s
 
-				Name: %s
-				Email: %s
-				Phone: %s
-				Service: %s
-				Event date: %s
-				Venue: %s
-				Attachments: %s
+				────────────────────────────────
+				Name:         %s
+				Email:        %s
+				Phone:        %s
+				Service:      %s
+				Event date:   %s
+				Venue:        %s
+				Attachments:  %s
+				────────────────────────────────
 
 				Message:
 				%s
+
+				────────────────────────────────
+				Reply directly to this email to respond to %s.
 				""".formatted(
+				siteProperties.getName(),
 				inquiryForm.getFullName(),
 				inquiryForm.getEmail(),
 				inquiryForm.getPhone(),
@@ -98,12 +114,14 @@ public class InquiryNotificationService {
 				inquiryForm.getEventDate() != null ? inquiryForm.getEventDate() : "Not supplied",
 				inquiryForm.getVenue(),
 				attachments.isEmpty() ? "None" : attachments.size() + " file(s) attached",
-				inquiryForm.getMessage()
+				inquiryForm.getMessage(),
+				inquiryForm.getFullName()
 		));
 
 		for (MultipartFile attachment : attachments) {
-			String filename = StringUtils.hasText(attachment.getOriginalFilename())
-					? StringUtils.cleanPath(attachment.getOriginalFilename())
+			String originalName = attachment.getOriginalFilename();
+			String filename = StringUtils.hasText(originalName)
+					? StringUtils.cleanPath(originalName).replaceAll("[/\\\\]", "_")
 					: "attachment";
 			helper.addAttachment(filename, attachment);
 		}
