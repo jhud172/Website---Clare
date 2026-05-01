@@ -1,6 +1,7 @@
 package co.uk.clarebrunton.ceremonies.service;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -121,7 +122,7 @@ public class InquiryNotificationService {
 		for (MultipartFile attachment : attachments) {
 			String originalName = attachment.getOriginalFilename();
 			String filename = StringUtils.hasText(originalName)
-					? StringUtils.cleanPath(originalName).replaceAll("[/\\\\]", "_")
+					? Paths.get(originalName).getFileName().toString()
 					: "attachment";
 			helper.addAttachment(filename, attachment);
 		}
