@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: page('Something went wrong', 'An unexpected error has occurred.', '', ~{::main})}">
+<main>
+    <section class="page-hero">
+        <div class="shell page-hero-inner">
+            <div>
+                <p class="eyebrow" th:text="${status != null} ? ${status} : 'Error'">Error</p>
+                <h1>Something went wrong.</h1>
+            </div>
+            <p class="lead">An unexpected error occurred. Please try again or return to the homepage.</p>
+            <a class="button" th:href="@{/}">Go to homepage</a>
+        </div>
+    </section>
+</main>
+</html>
